@@ -137,7 +137,7 @@ If `rule_3` is true, then `pipeline_1` would be active. The interpreter then sta
 
 ### Program generation
 
-As we mentioned, the interpreter will produce an [Aladino](./aladino/specification) program that will be executed.
+As we mentioned, the interpreter will produce an [Aladino](/guides/aladino/specification) program that will be executed.
 This program is simply a sequence of actions.
 
 We will use an example to illustrate how this program is generated. Assume that we have the following specification:

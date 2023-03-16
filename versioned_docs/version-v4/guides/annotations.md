@@ -24,7 +24,7 @@ Reviewpad supports the following annotations:
 
 This annotation marks a symbol with the provided `<annotation>`. The annotation can be any string, but it is recommended to use a short string that is unique to your project. For example, `@reviewpad-an: critical`.
 
-This annotation can then be used to identify when a symbol has been changed. We can do that using the built-in [hasAnnotation](./built-ins/#hasannotation).
+This annotation can then be used to identify when a symbol has been changed. We can do that using the built-in [hasAnnotation](/guides/built-ins/#hasannotation).
 
 #### Example
 
@@ -45,7 +45,7 @@ func main() {
 
 We've marked our `main` function as `critical` symbol to our project.
 
-Now, we can use the [hasAnnotation](./built-ins/#hasannotation) built-in, in our Reviewpad configuration, to identify when a `critical` symbol has been changed, and take the appropriate action.
+Now, we can use the [hasAnnotation](/guides/built-ins/#hasannotation) built-in, in our Reviewpad configuration, to identify when a `critical` symbol has been changed, and take the appropriate action.
 
 ```yml
 workflows:
