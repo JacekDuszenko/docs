@@ -110,7 +110,7 @@ An example:
 
 If the URL is not a GitHub blob, Reviewpad will return an error.
 
-The exact semantics of the `extends` mechanism is described on this [page](./extends).
+The exact semantics of the `extends` mechanism is described on this [page](/guides/extends).
 
 ## Label
 
@@ -162,7 +162,7 @@ There are two ways to specify a group:
 -   `name` of a group is used to reference it in other entities.
 -   `description` [OPTIONAL] is a string that can be used to provide more details about the group.
 -   `kind` [OPTIONAL] of group can only be _developers_ at the moment.
--   `spec` is an [Aladino](./aladino/specification) array.
+-   `spec` is an [Aladino](/guides/aladino/specification) array.
 
 #### Example
 
@@ -190,7 +190,7 @@ groups:
 -   `kind` of group can only be _developers_ at the moment.
 -   `type` with filter specifies that we will require a _param_ and a boolean _spec_.
 -   `param` declares the name of a variable representing a single developer.
--   `where` is an [Aladino](./aladino/specification) boolean expression that uses the _param_ variable to define a condition on which developers should be part of the group.
+-   `where` is an [Aladino](/guides/aladino/specification) boolean expression that uses the _param_ variable to define a condition on which developers should be part of the group.
 
 #### Example
 
@@ -220,7 +220,7 @@ The structure of a rule is as follows:
 -   `name` of a rule is used to reference it in other rules and workflows.
 -   `kind` [OPTIONAL] of a rule can be either _patch_ or _author._ The kind is related to different properties of pull requests that will be used in the evaluation of the _spec_ field.
 -   `description` [OPTIONAL] is a string that can be used to provide more details about the rule.
--   `spec` is a boolean expression in [Aladino](./aladino/specification).
+-   `spec` is a boolean expression in [Aladino](/guides/aladino/specification).
 
 #### Example
 
@@ -265,7 +265,7 @@ The structure of a workflow is as follows:
 -   `always-run` [OPTIONAL] field is a boolean that specifies if the workflow should run regardless of whether the previous workflows ran or not. If `true` then the workflow will always run. If `false` then the workflow will run only if none of the previous workflows have run. By default, this field is `false`. For instance, if workflow B has a precedent workflow A and both have `always-run: false` then workflow B will run only if workflow A has not run. If workflow B has `always-run: true` then it will run regardless of whether workflow A has run or not.
 -   `on` [OPTIONAL] field is a list of GitHub entity types that should trigger the workflow. By default, the value is `pull_request`.
 -   `if` field specifies which rules should be checked. For each rule, we can also specify a list of **extra actions** that will be executed if this rule is activated by the pull request.
--   `then` field is a list of [Reviewpad actions](./built-ins#actions) that should run.
+-   `then` field is a list of [Reviewpad actions](/guides/built-ins#actions) that should run.
 
 #### Example
 
