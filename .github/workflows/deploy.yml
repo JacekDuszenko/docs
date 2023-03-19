@@ -1,6 +1,6 @@
 # This workflows is based on Docusaurus documentation.
 # For more details follow https://docusaurus.io/docs/deployment#triggering-deployment-with-github-actions
-name: Deploy to GitHub Pages
+# name: Deploy to GitHub Pages
 
 on:
   push:

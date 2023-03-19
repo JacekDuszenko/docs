@@ -2,7 +2,17 @@
 
 This documentation details the release process.
 
-## Prerequisites
+The release process can be done manually or automatically.
+
+## Automatic release
+
+The automatic release is triggered by a GitHub action when a new tag is pushed into the repository.
+
+This tag should follow the [semantic versioning](https://semver.org/) syntax and should be done on the `main` branch.
+
+## Manual release
+
+### Prerequisites
 
 Please make sure that:
 
@@ -30,7 +40,7 @@ git status
 yarn build
 ```
 
-## Delete the current version from the documentation
+### Delete the current version from the documentation
 
 | :exclamation: In the following steps we assume that the current version is `v4`. |
 | -------------------------------------------------------------------------------- |
@@ -44,7 +54,7 @@ rm -rf versioned_docs/version-v4
 2. Navigate into the `versioned_sidebars` directory and delete the current version.
 
 ```bash
-rm -rf versioned_sidebars/version-v4-sidebars.json
+rm versioned_sidebars/version-v4-sidebars.json
 ```
 
 3. In the root of the project open the `versions.json` file and remove the current version.
@@ -57,7 +67,7 @@ After the changes the file should look like this:
 ]
 ```
 
-## Create a new version
+### Create a new version
 
 | :exclamation: In the following steps we assume that the new version is `v4`. |
 | ---------------------------------------------------------------------------- |
@@ -74,7 +84,7 @@ This command will do the following:
 2. Create a copy of the current `sidebars` add it as a new file `version-v4-sidebars.json` under `versioned_sidebars`.
 3. Add the `v4` into `versions.json` file.
 
-## Run and built it locally
+### Run and built it locally
 
 The next step is to run the documentation locally to make sure everything is working as expected.
 
@@ -92,7 +102,7 @@ yarn build
 
 You should be able to build the project without any errors.
 
-## Test the Reviewpad configurations
+### Test the Reviewpad configurations
 
 The project contains a set of Reviewpad configurations used for built-ins showcases and use cases.
 
@@ -112,7 +122,7 @@ e.g.
 ./scripts/checker.sh ~/reviewpad-cli ./docs GITHUB_TOKEN https://github.com/mascarilha/paddy/pull/1 my_event.json
 ```
 
-## Commit and push it
+### Commit and push it
 
 The next step is to commit and push these changes into the `main` branch.
 
@@ -125,7 +135,7 @@ git add .
 Then commit the changes following the commit syntax:
 
 ```bash
-git commit -m "chore(release): update version v4"
+git commit -m "chore: update version v4"
 ```
 
 After this, you can push the changes into the `main` branch which will trigger the deployment.
@@ -138,7 +148,7 @@ This will deploy the documentation into GitHub pages which will be live at [docs
 
 You can check the status of the deployment [here](https://github.com/reviewpad/docs/deployments).
 
-## Update algolia
+### Update algolia
 
 The last step is to update the search index in algolia.
 
