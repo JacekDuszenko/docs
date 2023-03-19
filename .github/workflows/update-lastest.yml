@@ -35,7 +35,10 @@ jobs:
           rm versioned_sidebars/version-${{ env.LATEST_VERSION }}-sidebars.json
           cp versions.old.json versions.json
 
-      - name: add latest version
+      - name: Files
+        run: ls -la
+
+      - name: Add latest version
         run:
           yarn run docusaurus docs:version ${{ env.LATEST_VERSION }}
 
