@@ -1,0 +1,6 @@
+workflows:
+  - name: check-compliance
+    if:
+      - $size() > 100
+    then:
+      - $error("This pull request is too large")

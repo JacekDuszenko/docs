@@ -1,0 +1,6 @@
+workflows:
+  - name: assign-reviewer-when-pr-ready-for-review
+    if:
+      - $eventType() == "ready_for_review"
+    then:
+      - $assignRandomReviewer()

@@ -1,0 +1,7 @@
+workflows:
+  - name: unauthorized-license-workflow
+    description: Protect unauthorized modifications to the LICENSE
+    if:
+      - $hasFileName("LICENSE")
+    then:
+      - $disableMerge("Pull Requests should not change the LICENSE")

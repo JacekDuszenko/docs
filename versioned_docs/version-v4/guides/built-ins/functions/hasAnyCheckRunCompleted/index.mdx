@@ -1,0 +1,85 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+:::caution
+
+This built-in is unavailable for issues. Reviewpad will ignore it when running on issues.
+
+:::
+
+:::caution
+
+[Please make sure you use the **check run name** and not the check suite name.](/troubleshooting#use-check-run-name)
+
+:::
+
+:::caution Known issue
+
+Please note that Reviewpad will run for **every check run** that is completed.
+
+This can be an issue if you use built-ins that are not idempotent (e.g. the [comment](/guides/built-ins#comment) built-in).
+In this case, Reviewpad will run the built-in multiple times.
+
+Here's an example of a `reviewpad.yml` configuration:
+
+```yml
+workflows:
+  - name: has-any-check-run-completed
+    if:
+      - $hasAnyCheckRunCompleted()
+    then:
+      - $comment("Hello")
+```
+
+In this example, if you have 5 checks Reviewpad comment "Hello" 5 times.
+
+:::
+
+**Description**:
+
+Checks, whether any check runs for a pull request, have been completed with the provided conclusions.
+
+If the `check_runs_to_ignore` parameter is provided, any check runs that have a name included in the parameter will be ignored.
+
+If the `check_conclusions` parameter is provided, only check runs that have been completed with one of the provided conclusions will be considered.
+
+The `check_conclusions` parameter accepts the following values: `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, and `timed_out`.
+
+**Parameters**:
+
+| Parameter                         | Type       | Description                                                   |
+| :---------------------------------| :--------- | :-------------------------------------------------------------|
+| `check_runs_to_ignore` (optional) | `[]string` | List of check run names to be disregarded. By default, is []  |
+| `check_conclusions` (optional)    | `[]string` | List of the final conclusions of the check. By default, is [] |
+
+**Return value**:
+
+| Type       | Description                                                                                              |
+| :--------- | :--------------------------------------------------------------------------------------------------------|
+| `boolean`  | `true` if there is at least one check completed with one of the provided conclusions, `false` otherwise. |
+
+**Examples**:
+
+#### Any check run has been completed with any conclusion.
+```yml
+$hasAnyCheckRunCompleted()
+```
+
+#### Any check run has failed.
+```yml
+$hasAnyCheckRunCompleted([], ["failure"])
+```
+
+#### Any check run has been skipped or failed.
+```yml
+$hasAnyCheckRunCompleted([], ["skipped", "failure"])
+```
+
+#### Any check run has been completed with skipped except for the `integration-tests` check run.
+```yml
+$hasAnyCheckRunCompleted(["integration-tests"], ["skipped"])
+```
+
+A `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>

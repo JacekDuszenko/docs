@@ -1,0 +1,6 @@
+workflows:
+  - name: labe-change-type
+    if:
+      - $contains($title(), "fix")
+    then:
+      - $addLabel("bug")

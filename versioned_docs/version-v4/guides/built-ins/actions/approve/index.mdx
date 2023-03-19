@@ -1,0 +1,36 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+:::caution
+
+This built-in is unavailable for issues. Reviewpad will ignore it when running on issues.
+
+:::
+
+:::note note
+
+This built-in is a shortcut to the [`review`](/guides/built-ins#review) built-in.
+It is the same as `$review("APPROVE", <MESSAGE>)`.
+
+:::
+
+**Description**:
+
+Submits a pull request review marked as approved.
+
+
+**Parameters**:
+
+| Parameter            | Type    | Description                        |
+| :------------------- | :------ | :--------------------------------- |
+| `message` (optional) | string  | The message to write as a comment. |
+
+**Examples**:
+
+```yml
+$approve()
+```
+
+A `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>

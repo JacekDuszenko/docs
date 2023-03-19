@@ -1,0 +1,10 @@
+rules:
+  - name: only-changes-documentation
+    spec: $hasFileExtensions([".md"])
+
+workflows:
+  - name: merge
+    if:
+      - rule: only-changes-documentation
+    then:
+      - $merge()

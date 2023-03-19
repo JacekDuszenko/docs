@@ -1,0 +1,6 @@
+workflows:
+  - name: branch-convention
+    if:
+      - rule: '!$matchString("(feature|fix|docs)/.+", $head())'
+    then:
+      - $error("The branch name must start with 'feature/', 'fix/' or 'docs/'")

@@ -1,0 +1,6 @@
+workflows:
+  - name: add-to-project
+    if:
+      - '!$isLinkedToProject("project-title")'
+    then:
+      - $addToProject("project-title", "column")

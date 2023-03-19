@@ -1,0 +1,42 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+:::caution
+
+This built-in is unavailable for issues. Reviewpad will ignore it when running on issues.
+
+:::
+
+**Description**:
+
+Verifies if the patch contains a symbol with the provided annotation, returning `true` or `false` as appropriate.
+
+:::info
+
+Please note that for this to work a symbol must be annotated with the `@reviewpad-an <annotation>` annotation.
+
+For more information annotations, please see [this page](/guides/annotations).
+
+:::
+
+**Parameters**:
+
+| Parameter    | Type   | Description                              |
+| :----------- | :----- | :--------------------------------------- |
+| `annotation` | string | The annotation to look for in the patch. |
+
+**Return value**:
+
+| Type      | Description                                                                           |
+| :-------- | :------------------------------------------------------------------------------------ |
+| `boolean` | `true` if the patch changes a symbol with the provided annotation, `false` otherwise. |
+
+**Examples**:
+
+```yml
+$hasAnnotation("critical")
+```
+
+A `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>

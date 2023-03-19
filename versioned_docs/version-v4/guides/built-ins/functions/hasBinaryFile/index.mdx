@@ -1,0 +1,32 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+:::caution
+
+This built-in is unavailable for issues. Reviewpad will ignore it when running on issues.
+
+:::
+
+**Description**:
+
+Checks if a pull request has a binary file in the patch.
+
+**Parameters**:
+
+_none_
+
+**Return value**:
+
+| Type      | Description                                                           |
+| :-------- | :-------------------------------------------------------------------- |
+| `boolean` | `true` if the pull request contains a binary file, `false` otherwise. |
+
+**Examples**:
+
+```yml
+$hasBinaryFile()
+```
+
+A `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>

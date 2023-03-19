@@ -1,0 +1,6 @@
+workflows:
+  - name: label-mergeable
+    if:
+      - rule: $selectFromJSON($toJSON($context()), "$.mergeable") == "true"
+    then:
+      - $addLabel("mergeable")

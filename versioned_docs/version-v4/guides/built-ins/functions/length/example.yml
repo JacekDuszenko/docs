@@ -1,0 +1,6 @@
+workflows:
+  - name: check-compliance
+    if:
+      - rule: $length($reviewers()) < 2
+        extra-actions:
+          - $info("A pull request needs at least 2 reviews")

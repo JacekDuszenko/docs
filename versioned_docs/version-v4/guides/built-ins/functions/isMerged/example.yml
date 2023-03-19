@@ -1,0 +1,6 @@
+workflows:
+  - name: notify-unaddressed-threads-merge
+    if:
+      - rule: $hasUnaddressedThreads() && $isMerged()
+    then:
+      - $comment("Pull request merged with unaddressed threads!")

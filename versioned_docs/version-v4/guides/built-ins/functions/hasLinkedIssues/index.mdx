@@ -1,0 +1,32 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+:::caution
+
+This built-in is unavailable for issues. Reviewpad will ignore it when running on issues.
+
+:::
+
+**Description**:
+
+Checks if a pull request has associated issues that might be closed by it.
+
+**Parameters**:
+
+_none_
+
+**Return value**:
+
+| Type      | Description                                                      |
+| :-------- | :--------------------------------------------------------------- |
+| `boolean` | `true` if the pull request has linked issues, `false` otherwise. |
+
+**Examples**:
+
+```yml
+$hasLinkedIssues()
+```
+
+A `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>

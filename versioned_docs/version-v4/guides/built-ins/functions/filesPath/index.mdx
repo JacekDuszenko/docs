@@ -1,0 +1,32 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+:::caution
+
+This built-in is unavailable for issues. Reviewpad will ignore it when running on issues.
+
+:::
+
+**Description**:
+
+Retrieves the list of all file paths changed in the pull request.
+
+**Parameters**:
+
+_none_
+
+**Return value**:
+
+| Type       | Description                                          |
+| :--------- | :--------------------------------------------------- |
+| `[]string` | A list of all file paths changed files in the patch. |
+
+**Examples**:
+
+```yml
+$filesPath()
+```
+
+A `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>

@@ -1,0 +1,6 @@
+workflows:
+  - name: configuration-changes
+    if:
+      - $hasFileExtensions([".yaml"])
+    then:
+      - $assignTeamReviewer(["devops"])

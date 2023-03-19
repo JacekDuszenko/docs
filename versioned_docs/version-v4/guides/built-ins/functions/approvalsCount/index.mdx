@@ -1,0 +1,32 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+:::caution
+
+This built-in is unavailable for issues. Reviewpad will ignore it when running on issues.
+
+:::
+
+**Description**:
+
+Retrieves the total number of approvals for a pull request.
+
+**Parameters**:
+
+_none_
+
+**Return value**:
+
+| Type  | Description                                                  |
+| :---- | :----------------------------------------------------------- |
+| `int` | The total number of approvals the pull request has received. |
+
+**Examples**:
+
+```yml
+$approvalsCount()
+```
+
+A `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>

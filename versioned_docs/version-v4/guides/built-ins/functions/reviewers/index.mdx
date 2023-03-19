@@ -1,0 +1,48 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+:::caution
+
+This built-in is unavailable for issues. Reviewpad will ignore it when running on issues.
+
+:::
+
+:::caution
+
+Be aware that this built-in **DOES NOT** retrieve the list of **ALL** reviewers on a pull request but the list of the reviewers that have **REVIEWED** the pull request.
+
+If you wish to retrieve the list of all reviewers on a pull request, you can create a [`group`](/guides/syntax#group) and use both [`reviewers`](/guides/built-ins#review) and [`requestedReviewers`](/guides/built-ins#requestedreviewers) built-ins.
+
+Here's an example:
+
+```yml
+groups:
+  - name: all-reviewers
+    spec: $append($reviewers(), $requestedReviewers())
+```
+
+:::
+
+**Description**:
+
+Retrieves the list of GitHub user logins that have reviewed the pull request.
+
+**Parameters**:
+
+_none_
+
+**Return value**:
+
+| Type       | Description                                                         |
+| :--------- | :------------------------------------------------------------------ |
+| `[]string` | The list of GitHub user logins that have reviewed the pull request. |
+
+**Examples**:
+
+```yml
+$reviewers()
+```
+
+A `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>

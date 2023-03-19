@@ -1,0 +1,6 @@
+workflows:
+  - name: debug
+    if:
+      - rule: $isElementOf("debug", $labels())
+    then:
+      - $info($context())

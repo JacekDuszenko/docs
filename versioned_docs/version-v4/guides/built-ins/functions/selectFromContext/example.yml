@@ -1,0 +1,6 @@
+workflows:
+  - name: label-rebaseable
+    if:
+      - rule: $selectFromContext("$.rebaseable") == "true"
+    then:
+      - $addLabel("rebaseable")
