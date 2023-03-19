@@ -1,6 +1,0 @@
-workflows:
-  - name: core-changes
-    if:
-      - $hasFilePattern("src/transactions/**")
-    then:
-      - $assignTeamReviewer(["core"])

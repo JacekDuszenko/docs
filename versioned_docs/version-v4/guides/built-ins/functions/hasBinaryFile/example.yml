@@ -1,7 +1,0 @@
-workflows:
-  - name: disallow-binary-file
-    if:
-      - $hasBinaryFile()
-    then:
-      - $close()
-      - $error("Please don't add any binary file into the repository")

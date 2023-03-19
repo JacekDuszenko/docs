@@ -1,9 +1,0 @@
-workflows:
-  - name: congratulate
-    if:
-      - rule: $issueCountBy($author(), "all") == 1
-        extra-actions:
-          - $commentOnce("Congratulations on your first issue!")
-      - rule: $issueCountBy($author(), "all") == 10
-        extra-actions:
-          - $commentOnce("Way to go! You have created 10 issues!")

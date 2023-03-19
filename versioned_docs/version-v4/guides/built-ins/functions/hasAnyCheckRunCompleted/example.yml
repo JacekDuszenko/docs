@@ -1,6 +1,0 @@
-workflows:
-  - name: check-run-failure
-    if:
-      - $hasAnyCheckRunCompleted([], ["failure"])
-    then:
-      - $review("REQUEST_CHANGES", "Some of the pull request checks are failing. Please fix them.")

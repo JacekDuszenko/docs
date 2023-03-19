@@ -1,6 +1,0 @@
-workflows:
-  - name: merge
-    if:
-      - rule: $workflowStatus("build") == "success"
-    then:
-      - $merge()

@@ -1,6 +1,0 @@
-workflows:
-  - name: check-compliance
-    if:
-      - $hasGitConflicts()
-    then:
-      - $fail("Pull request has git conflicts")

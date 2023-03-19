@@ -1,6 +1,0 @@
-workflows:
-  - name: waiting-for-feedback
-    if:
-      - $comments() == []
-    then:
-      - $addLabel("waiting-for-feedback")

@@ -1,6 +1,0 @@
-workflows:
-  - name: requires-review
-    if:
-      - $isElementOf($author(), $team("juniors"))
-    then:
-      - $assignTeamReviewer(["seniors"])

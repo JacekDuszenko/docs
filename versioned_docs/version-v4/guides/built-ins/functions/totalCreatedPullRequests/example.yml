@@ -1,6 +1,0 @@
-workflows:
-  - name: workload
-    if:
-      - $pullRequestCountBy($author(), "open") > 2
-    then:
-      - $commentOnce("You have too many open pull requests.")

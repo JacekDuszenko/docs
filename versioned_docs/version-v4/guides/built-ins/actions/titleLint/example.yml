@@ -1,6 +1,0 @@
-workflows:
-  - name: check-conventional-commits
-    if:
-      - $base() == "main"
-    then:
-      - $titleLint()
