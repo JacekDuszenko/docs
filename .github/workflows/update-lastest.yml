@@ -30,17 +30,13 @@ jobs:
         run: yarn build
 
       - name: Remove latest version
-        run:
+        run: |
           rm -rf versioned_docs/version-${{ env.LATEST_VERSION }}
           rm versioned_sidebars/version-${{ env.LATEST_VERSION }}-sidebars.json
-          cp versions.old.json versions.json
-
-      - name: Files
-        run: ls -la
+          cat versions.old.json > versions.json
 
       - name: Add latest version
-        run:
-          yarn run docusaurus docs:version ${{ env.LATEST_VERSION }}
+        run: yarn run docusaurus docs:version ${{ env.LATEST_VERSION }}
 
       - name: Build website with latest version
         run: yarn build
