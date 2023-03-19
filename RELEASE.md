@@ -6,9 +6,13 @@ The release process can be done manually or automatically.
 
 ## Automatic release
 
-The automatic release is triggered by a GitHub action when a new tag is pushed into the repository.
+The automatic release can be done in two ways:
+- By creating and pushing a new tag into the repository. This tag should follow the [semantic versioning](https://semver.org/) syntax and should be done on the `main` branch.
+- [By triggering the workflow manually](https://github.com/reviewpad/docs/actions/workflows/update-lastest.yml).
 
-This tag should follow the [semantic versioning](https://semver.org/) syntax and should be done on the `main` branch.
+Both of these options will trigger the [update-lastest.yml](.github/workflows/update-lastest.yml) workflow.
+
+This workflow will update the `latest` version of the documentation and push it into the main branch which will trigger the deployment to GitHub pages.
 
 ## Manual release
 

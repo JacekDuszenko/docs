@@ -1,6 +1,6 @@
 # This workflows is based on Docusaurus documentation.
 # For more details follow https://docusaurus.io/docs/deployment#triggering-deployment-with-github-actions
-name: Update latest version
+name: Deploy latest version
 
 on:
   workflow_dispatch:
