@@ -1,5 +1,5 @@
-# This workflows is based on Docusaurus documentation.
-# For more details follow https://docusaurus.io/docs/deployment#triggering-deployment-with-github-actions
+# This workflow deploy the latest version of the documentation
+# It is triggered when a new tag is pushed or manually
 name: Deploy latest version
 
 on:
