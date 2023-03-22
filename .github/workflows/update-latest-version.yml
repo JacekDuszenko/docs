@@ -1,16 +1,13 @@
-# This workflow deploy the latest version of the documentation
-# It is triggered when a new tag is pushed or manually
-name: Deploy latest version
+name: Create pull request to update latest version
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - v*
 
 jobs:
   deploy:
-    name: Update latest version
+    name: Create pull request to update latest version
     runs-on: ubuntu-latest
 
     env:
@@ -22,12 +19,6 @@ jobs:
         with:
           node-version: 18
           cache: yarn
-
-      - name: Setup git
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git switch main
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -47,8 +38,19 @@ jobs:
       - name: Build website with latest version
         run: yarn build
 
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -m "chore: update version ${{ env.LATEST_VERSION }}"
-          git push
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "feat(release): update version ${{ env.LATEST_VERSION }}"
+          branch: release/${{ github.ref_name }}
+          delete-branch: true
+          base: main
+          title: "feat(release): Update version ${{ env.LATEST_VERSION }}"
+          body: |
+            ## Description
+            This pull request updates the version ${{ env.LATEST_VERSION }} of the documentation.
+
+
+            ## Code review and merge strategy (ship/show/ask)
+            **Ship**: this pull request can be automatically merged and does not require code review
+          labels: release
