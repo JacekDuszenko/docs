@@ -1,6 +1,7 @@
 name: Create pull request to update latest version
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - v*
