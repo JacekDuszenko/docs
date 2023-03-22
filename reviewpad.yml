@@ -5,7 +5,7 @@ extends:
 
 groups:
   - name: maintainers
-    spec: '["marcelosousa", "ferreiratiago", "shay2025", "zolamk"]'
+    spec: '["marcelosousa", "ferreiratiago", "shay2025", "zolamk", "reviewpad-bot"]'
 
 rules:
   - name: authored-by-maintainer
