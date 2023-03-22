@@ -41,6 +41,7 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
+          token: ${{ secrets.REVIEWPAD_TOKEN }}
           commit-message: "feat(release): update version ${{ env.LATEST_VERSION }}"
           branch: release/${{ github.ref_name }}
           delete-branch: true
