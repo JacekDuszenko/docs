@@ -10,9 +10,9 @@ The automatic release can be done in two ways:
 - By creating and pushing a new tag into the repository. This tag should follow the [semantic versioning](https://semver.org/) syntax and should be done on the `main` branch.
 - [By triggering the workflow manually](https://github.com/reviewpad/docs/actions/workflows/update-latest-version.yml).
 
-Both of these options will trigger the [update-latest-version.yml](.github/workflows/update-latest-version.yml) workflow.
+For both of these options, a pull request in `ship` mode will be created with the changes for the new version.
 
-This workflow will update the `latest` version of the documentation and push it into the main branch which will trigger the deployment to GitHub pages.
+Because the pull request is in `ship` mode, it will be merged automatically by Reviewpad and a new version will be created.
 
 ## Manual release
 
