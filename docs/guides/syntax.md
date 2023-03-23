@@ -55,7 +55,7 @@ You can check the latest formal version of the format [here](https://github.com/
 
 ## Mode
 
-The `mode` property is a flag that allows you to enable or disable reports of Reviewpad as a pull request comment.
+The `mode` property is a flag that enables or disables reports of Reviewpad as a pull request comment.
 
 By default, Reviewpad runs on `silent` mode.
 
@@ -69,9 +69,9 @@ mode: verbose # optional
 
 ## Ignore errors
 
-The `ignore-errors` property is a boolean flag that allows you to specify if the Reviewpad should ignore execution errors.
+The `ignore-errors` property is a boolean flag that specifies if the Reviewpad should ignore execution errors.
 
-By default, this flag is `false` which means that Reviewpad will fail if an error is raised.
+By default, this flag is `false` so Reviewpad will fail if an error is raised.
 
 #### Example
 
@@ -81,10 +81,10 @@ ignore-errors: true # optional
 
 ## Metrics on merge
 
-The `metrics-on-merge` property is a boolean flag that allows you to specify if the Reviewpad
+The `metrics-on-merge` property is a boolean flag that specifies if the Reviewpad
 should add a metrics report when the pull request is merged.
 
-By default, this flag is `false` which means that Reviewpad will not add this report.
+By default, this flag is `false` so Reviewpad will not add this report.
 
 This report is only added if Reviewpad reacts to the `closed` event on a pull request.
 
@@ -104,7 +104,7 @@ metrics-on-merge: true
 
 ## Extends
 
-The `extends` property allows users to extend other Reviewpad configurations represented as
+The `extends` property extends other Reviewpad configurations represented as
 GitHub blob urls (e.g. `https://github.com/reviewpad/reviewpad/blob/main/reviewpad.yml`).
 
 An example:
@@ -133,7 +133,7 @@ LABEL-ID:
 
 If the label does not exist in the repository, it will be created.
 
-If the label already exists in the repository and the description or the color set in the `reviewpad.yml` file, then both the description and the color will be updated based on the `reviewpad.yml` file.
+If the label already exists in the repository and the description or the color is set in the `reviewpad.yml` file, then both the description and the color will be updated based on the `reviewpad.yml` file.
 
 #### Example
 
