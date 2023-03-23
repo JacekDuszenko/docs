@@ -58,7 +58,8 @@ You can check the latest formal version of the format [here](https://github.com/
 The `mode` property is a flag that allows you to enable or disable reports of Reviewpad as a pull request comment.
 
 By default, Reviewpad runs on `silent` mode.
-However, you can choose to use `verbose` mode and Reviewpad will comment on the pull request with the execution results and,
+
+However, you can choose to use `verbose` mode and Reviewpad will comment on the pull request with the execution results.
 
 #### Example
 
