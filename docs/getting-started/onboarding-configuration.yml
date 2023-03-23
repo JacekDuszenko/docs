@@ -20,6 +20,27 @@ labels:
 # A workflow is a list of actions that will be executed based on the defined rules.
 # For more details see https://docs.reviewpad.com/guides/syntax#workflow.
 workflows:
+  # This workflow calls Reviewpad AI agent to summarize the pull request.
+  - name: summarize
+    description: Summarize the pull request
+    always-run: true
+    if:
+      # Summarize the pull requests when pull requests are opened or synchronized.
+      - rule: ($eventType() == "synchronize" || $eventType() == "opened") && $state() == "open"
+        extra-actions:
+          - $summarize()
+
+  # This workflow assigns the most relevant reviewer to pull requests.
+  # This helps guarantee that pull requests are reviewed by at least one person.
+  - name: reviewer-assignment
+    description: Assign the most relevant reviewer to pull requests
+    always-run: true
+    if:
+      # Automatically assign reviewer when the pull request is ready for review.
+      - rule: $isDraft() == false
+        extra-actions:
+          - $assignCodeAuthorReviewers()
+
   # This workflow praises contributors on their pull request contributions.
   # This helps contributors feel appreciated.
   - name: praise-contributors-on-milestones
@@ -30,10 +51,6 @@ workflows:
       - rule: $pullRequestCountBy($author()) == 1
         extra-actions:
           - $commentOnce($sprintf("Thank you @%s for this first contribution!", [$author()]))
-      # Praise contributors on their 100th pull request.
-      - rule: $pullRequestCountBy($author()) == 100
-        extra-actions:
-          - $commentOnce($sprintf("Way to go 🎉 This is your 100th pull request!", [$author()]))
 
   # This workflow validates that pull requests follow the conventional commits specification.
   # This helps developers automatically generate changelogs.
@@ -70,7 +87,7 @@ workflows:
 
   # This workflow labels pull requests based on the total number of lines changed.
   # This helps pick pull requests based on their size and to incentivize small pull requests.
-  - name: size-labelling
+  - name: size-labeling
     description: Label pull request based on the number of lines changed
     always-run: true
     if:
@@ -87,17 +104,6 @@ workflows:
           - $removeLabels(["small", "medium"])
           - $addLabel("large")
 
-  # This workflow assigns a random reviewer to pull requests.
-  # This helps guarantee that most pull requests are reviewed by at least one person.
-  - name: reviewer-assignment
-    description: Assign a reviewer to pull requests
-    always-run: true
-    if:
-      # Automatically assign a random reviewer when the pull request is ready for review;
-      - rule: $isDraft() == false
-        extra-actions:
-          - $assignRandomReviewer()
-
   # This workflow signals pull requests waiting for reviews.
   # This helps guarantee that pull requests are reviewed and approved by at least one person.
   - name: check-approvals
@@ -108,9 +114,6 @@ workflows:
       - rule: $isDraft() == false && $approvalsCount() < 1
         extra-actions:
           - $addLabel("waiting-for-review")
-      - rule: $isDraft() == false && $approvalsCount() > 0
-        extra-actions:
-          - $removeLabel("waiting-for-review")
 
   # This workflow labels pull requests based on the pull request change type.
   # This helps pick pull requests based on their change type.
