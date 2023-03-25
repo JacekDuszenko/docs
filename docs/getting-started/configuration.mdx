@@ -7,49 +7,59 @@ slug: "configuration"
 import CodeBlock from "@theme/CodeBlock";
 import OnboardingConfiguration from "!!raw-loader!./onboarding-configuration.yml";
 
+For Reviewpad to work, it needs a configuration file called **`reviewpad.yml`** in the **root** of your repository.
+
+This configuration is where you define the **automations** that Reviewpad will run on every pull request.
+
+There are **two ways** to add the `reviewpad.yml` configuration file to your repository:
+- [Accept the onboarding pull request](#accept-the-onboarding-pull-request)
+- [Create the configuration file manually](#create-the-reviewpad-configuration-file-manually)
+
+## Accept the onboarding pull request {#accept-the-onboarding-pull-request}
+
+After installing Reviewpad, an onboarding pull request is created in **each** repository where Reviewpad is installed.
+
+**You can accept the onboarding pull request by merging it.**
+
+By merging the onboarding pull request, the Reviewpad configuration file `reviewpad.yml` is added to the root of your repository.
+
+That's it! :tada:
+
+You are ready to use Reviewpad to automate your pull request process.
+
 :::info
 
-If you have selected the option **`Only select repositories`** during the [installation](installation) you **don't need** to follow this guide.
-
-Reviewpad will **automatically** create a pull request in the select repositories with the configuration file.
-
-You will need to merge the pull requests to start using Reviewpad.
+Please note that you will need to merge the onboarding pull request for **each** repository where Reviewpad is installed.
 
 :::
 
-Now that you have installed Reviewpad it's time to configure it.
+### Didn't get the onboarding pull request?
 
-**The Reviewpad configuration is a YAML file that defines the workflows that automate your pull request process.**
+If you have a lot of repositories, it might take a while for Reviewpad to create the onboarding pull requests.
 
-In this example, we will add a configuration with some of the **best practices** for pull request reviews.
+If you don't see an onboarding pull request after a few minutes, please [create the Reviewpad configuration file manually](#create-the-reviewpad-configuration-file-manually).
 
-## Add `reviewpad.yml` to the root of your repository
+If you have any issues please reach us on our [community server](https://reviewpad.com/discord).
 
-:::caution
+## Create the Reviewpad configuration file manually {#create-the-reviewpad-configuration-file-manually}
 
-Please note that you will need to add a `reviewpad.yml` file to **each repository** where you wish to use Reviewpad.
-
-:::
-
-Reviewpad will look for a `reviewpad.yml` file in the root of your repository and follow the workflows defined in it.
-
-Create a file called `reviewpad.yml` in the root of your repository and add the following content:
+Create a file called `reviewpad.yml` in the **root** of your repository and add the following content:
 
 <CodeBlock language="yml" title="reviewpad.yml">{OnboardingConfiguration}</CodeBlock>
 
 ![Reviewpad Installation - Step 3](/img/installation/step3.gif)
 
+Do not forget to **push** the file to the repository.
+
 That's it! :tada:
 
 Reviewpad will run on every pull request and follow the workflows defined in the `reviewpad.yml` configuration file.
-
-**👉 Don't forget to commit and push the `reviewpad.yml` file to your repository.**
 
 ## Next steps
 
 Now that you have configured Reviewpad you can start using it to automate your pull request process.
 
-Have a look at the [use cases](/use-cases) to see how Reviewpad can help you.
+Have a look at our [built-ins](/guides/built-ins) and [use cases](/use-cases) to see how Reviewpad can help you.
 
 :::info Terms and Conditions
 
