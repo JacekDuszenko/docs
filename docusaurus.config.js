@@ -52,6 +52,7 @@ const config = {
                         '/guides/built-ins/functions/**',
                         '**/commands/**-**',
                         '**/commands/run',
+                        '**/commands/summarize',
                         '/changelog/reviewpad-**',
                         '/changelog/v**',
                     ],
