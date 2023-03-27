@@ -55,7 +55,7 @@ You can check the latest formal version of the format [here](https://github.com/
 
 ## Mode
 
-The `mode` property is a flag that enables or disables reports of Reviewpad as a pull request comment.
+The `mode` property is a flag that enables or disables Reviewpad's [executed actions report](/guides/reports#executed-actions-report).
 
 By default, Reviewpad runs on `silent` mode.
 
@@ -81,12 +81,9 @@ ignore-errors: true # optional
 
 ## Metrics on merge
 
-The `metrics-on-merge` property is a boolean flag that specifies if the Reviewpad
-should add a metrics report when the pull request is merged.
+The `metrics-on-merge` property is a boolean flag that specifies if Reviewpad should add a metrics report when a pull request is merged.
 
 By default, this flag is `false` so Reviewpad will not add this report.
-
-This report is only added if Reviewpad reacts to the `closed` event on a pull request.
 
 The metrics report includes the following metrics:
 
@@ -104,14 +101,18 @@ metrics-on-merge: true
 
 ## Extends
 
-The `extends` property extends other Reviewpad configurations represented as
-GitHub blob urls (e.g. `https://github.com/reviewpad/reviewpad/blob/main/reviewpad.yml`).
+The `extends` property extends other Reviewpad configurations represented as GitHub blob URLs (e.g. `https://github.com/reviewpad/reviewpad/blob/main/reviewpad.yml`).
 
-An example:
-
-If the URL is not a GitHub blob, Reviewpad will return an error.
+If the URL is not a GitHub blob, an error will be raised.
 
 The exact semantics of the `extends` mechanism is described on this [page](/guides/extends).
+
+### Example
+
+```yml
+extends:
+  - https://github.com/reviewpad/.github/blob/main/reviewpad-models/common.yml
+```
 
 ## Label
 
@@ -129,7 +130,7 @@ LABEL-ID:
 -   `LABEL-ID` of a label is used to reference it in other entities. If no `name` is provided, then the `LABEL-ID` is considered the `name`.
 -   `name` [OPTIONAL] is the name of the label as seen on GitHub.
 -   `description` [OPTIONAL] is a short description of the label. Must be 100 characters or fewer.
--   `color` [OPTIONAL] is the [hexadecimal color code](https://www.color-hex.com/) for the label, with or without the leading #.
+-   `color` [OPTIONAL] is the [hexadecimal color code](https://www.color-hex.com/) for the label, with or without the leading `#`.
 
 If the label does not exist in the repository, it will be created.
 
@@ -151,7 +152,7 @@ A group specifies a list of entities. At the moment, we only support GitHub user
 
 There are two ways to specify a group:
 
-### Group By Enumeration
+### Group by enumeration
 
 ```yaml
 - name: STRING
@@ -175,7 +176,7 @@ groups:
     spec: '["peter"]'
 ```
 
-### Group By Filter
+### Group by filter
 
 ```yaml
 - name: STRING
