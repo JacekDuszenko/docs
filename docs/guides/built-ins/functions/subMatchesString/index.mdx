@@ -1,0 +1,30 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+**Description**:
+
+Extracts the first match on a string based on a given regular expression pattern.
+
+**Parameters**:
+
+| Parameter       | Type     | Description                                                      |
+| :-------------- | :------- | :--------------------------------------------------------------- |
+| `pattern`       | `string` | The regular expression pattern to match against the input value  |
+| `input`         | `string` | The string value to test against the given pattern               |
+
+**Return value**:
+
+| Type      | Description                                         |
+| :-------- | :-------------------------------------------------- |
+| `string`  | `""` if the input string does not have the pattern  |
+
+**Examples**:
+
+Matching a string against a simple pattern.
+```yml
+$subMatchesString("name:\\s*(\\w+)", "name: Peter")
+```
+
+Using this function in a `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>
