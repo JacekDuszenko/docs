@@ -1,15 +1,12 @@
 import CodeBlock from "@theme/CodeBlock";
 import Example from "!!raw-loader!./example.yml";
 
-:::caution
-
-This built-in is unavailable for issues. Reviewpad will ignore it when running on issues.
-
-:::
-
 **Description**:
 
-Retrieves the type of the [pull request event](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request).
+Retrieves the type of the
+- [pull request event](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request) when Reviewpad is triggered by a pull request event.
+- [issue event](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#issues) when Reviewpad is triggered by an issue event.
+
 
 **Parameters**:
 
@@ -17,9 +14,9 @@ _none_
 
 **Return value**:
 
-| Type     | Description                             |
-| :------- | :-------------------------------------- |
-| `string` | The `pull_request` event activity type. |
+| Type     | Description                                     |
+| :------- | :---------------------------------------------- |
+| `string` | The `pull_request`/`issue` event activity type. |
 
 **Examples**:
 
