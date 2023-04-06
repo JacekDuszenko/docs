@@ -1,0 +1,6 @@
+workflows:
+  - name: add-label-based-on-description-heading
+    if:
+      - true
+    then:
+      - $addLabel($extractMarkdownHeadingContent($description(), "Merge strategy", 2))

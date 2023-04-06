@@ -1,0 +1,31 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+**Description**:
+
+Extracts content from a Markdown heading with the title and the heading level.
+
+**Parameters**:
+
+| Parameter | Type   | Description                    |
+| :-------- | :----- | :----------------------------- |
+| `input`   | string | Input Markdown string          |
+| `title`   | string | Title of the heading           |
+| `level`   | int    | Heading level                  |
+
+
+**Return value**:
+
+| Type      | Description                                                                       |
+| :-------- | :-------------------------------------------------------------------------------- |
+| `string`  | `""` if `heading` with `level` does not exist in `input`, the contents otherwise. |
+
+**Examples**:
+
+```yml
+$extractMarkdownHeadingContent($description(), "How", 2) # It will extract the body of ## How in the description
+```
+
+A `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>
