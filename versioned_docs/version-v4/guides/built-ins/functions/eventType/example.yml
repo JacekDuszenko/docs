@@ -4,3 +4,10 @@ workflows:
       - $eventType() == "ready_for_review"
     then:
       - $assignRandomReviewer()
+  - name: add-to-project-when-issue-opened
+    on:
+      - issue
+    if:
+      - $eventType() == "opened"
+    then:
+      - $addToProject("project-title", "column")
