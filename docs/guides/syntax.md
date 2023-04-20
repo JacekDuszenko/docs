@@ -268,15 +268,15 @@ The structure of a workflow is as follows:
 - `run` field specifies the action or the list of actions to be executed in the workflow:
     - `if` field specifies the condition that should be satisfied for the `then` field to run. The `if` field can be a reference to a rule by its name or an inline rule.
     - `then` field defines the [Reviewpad action](/guides/built-ins#actions) or the list of [Reviewpad actions](/guides/built-ins#actions) to run when `if` evaluates to true.
-    - `else` field defines the [Reviewpad action](/guides/built-ins#actions) or the list of [Reviewpad actions](/guides/built-ins#actions) to run when `if` evaluates to false.
+    - `else` field defines the [Reviewpad action](/guides/built-ins#actions) or the list of [Reviewpad actions](/guides/built-ins#actions) to run when `if` evaluates to false. This field is optional.
 
-#### Field `run`
+### `run` {worlfow-run}
 
 The `run` field can be a single action or a list of actions. An action is an [Aladino](/guides/aladino/specification) expression to be executed.
 
 We can also use the `if ... then ... else` conditional actions to specify a list of actions to run depending on the evaluation of the `if` field.
 
-##### Single action
+#### Single action
 
 ```yml
 workflows:
@@ -284,7 +284,7 @@ workflows:
     run: $addLabel("bug")
 ```
 
-##### List of actions
+#### List of actions
 
 ```yml
 workflows:
@@ -294,7 +294,7 @@ workflows:
       - $addLabel("documentation")
 ```
 
-##### Conditional actions
+#### Conditional actions
 
 ```yml
 workflows:
@@ -307,7 +307,7 @@ workflows:
         else: $addLabel("large")
 ```
 
-The above configuration specifies one workflow called `label` which automatically labels pull requests with `bug` and `documentation` labels. If the pull request size is less than 100 then the `small` label is added. Otherwise, the `large` label is added.
+The above configuration specifies one workflow called `label` which automatically labels pull requests with `bug` and `documentation` labels. If the pull request size is less than 100 then the `small` label is added. Otherwise, a `large` label is added.
 
 For a pull request with size 150, the labels `bug`, `documentation`, and `medium` will be added.
 
@@ -330,6 +330,30 @@ workflows:
 ```
 
 In the above example, for a pull request with size 150, the labels `bug`, `documentation`, and `medium` will be added.
+
+It is also important to note both the `then` and `else` fields can have a single action or a list of actions.
+
+#### Example
+
+```yml
+workflows:
+  - name: label
+    run:
+      - $addLabel("bug")
+      - $addLabel("documentation")
+      - if: $size() < 100
+        then:
+          # Run a list of actions
+          - $addLabel("small")
+          - $info("The pull request size is small")
+        else:
+          # Run a list of actions
+          - $addLabel("large")
+          - if: $size() > 500
+            # Run a single action
+            then: $info("The pull request size is very large")
+          - $assignRandomReviewer()
+```
 
 ## Pipeline
 
