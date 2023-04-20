@@ -270,7 +270,8 @@ The structure of a workflow is as follows:
     - `then` field defines the [Reviewpad action](/guides/built-ins#actions) or the list of [Reviewpad actions](/guides/built-ins#actions) to run when `if` evaluates to true.
     - `else` field defines the [Reviewpad action](/guides/built-ins#actions) or the list of [Reviewpad actions](/guides/built-ins#actions) to run when `if` evaluates to false. This field is optional.
 
-### `run` {worlfow-run}
+<!-- define ancho as workflow-run -->
+### `run` {#workflow-run}
 
 The `run` field can be a single action or a list of actions. An action is an [Aladino](/guides/aladino/specification) expression to be executed.
 
