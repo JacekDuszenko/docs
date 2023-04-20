@@ -1,9 +1,7 @@
 workflows:
   - name: label-milestone
-    if:
-      - rule: $milestone() == "Hacktoberfest"
-        extra-actions:
-          - $addLabel("hacktoberfest")
-      - rule: $startsWith($milestone(), "v")
-        extra-actions:
-          - $addLabel("release")
+    run:
+      - if: $milestone() == "Hacktoberfest"
+        then: $addLabel("hacktoberfest")
+      - if: $startsWith($milestone(), "v")
+        then: $addLabel("release")

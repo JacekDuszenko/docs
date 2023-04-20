@@ -1,6 +1,5 @@
 workflows:
   - name: check-compliance
-    if:
-      - $hasLinearHistory() == false
-    then:
-      - $fail("The pull request does not have a linear history.")
+    run:
+      if: $hasLinearHistory() == false
+      then: $fail("The pull request does not have a linear history.")

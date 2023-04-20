@@ -1,12 +1,8 @@
-rules:
-  - name: external-contributor
-    spec: $isElementOf($author(), $organization()) == false
-
 workflows:
   - name: external-contributions
-    if:
-      - rule: external-contributor
-    then:
-      - $assignTeamReviewer(["core"])
-      - $addLabel("external-contributor")
-      - $commentOnce("Thank you for your contribution!")
+    run:
+      if: $isElementOf($author(), $organization()) == false
+      then:
+        - $assignTeamReviewer(["core"])
+        - $addLabel("external-contributor")
+        - $commentOnce("Thank you for your contribution!")

@@ -1,6 +1,5 @@
 workflows:
   - name: run-critical-ci
-    if:
-      - $hasAnnotation("critical")
-    then:
-      - $triggerWorkflow("ci-critical-tests.yml")
+    run:
+      if: $hasAnnotation("critical")
+      then: $triggerWorkflow("ci-critical-tests.yml")

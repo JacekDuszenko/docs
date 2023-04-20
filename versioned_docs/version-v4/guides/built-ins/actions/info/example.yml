@@ -1,7 +1,7 @@
 workflows:
   - name: when-transactions
-    if:
-      - $hasFilePattern("**/transactions")
-    then:
-      - $info("You have changed transactions. Please schedule a meeting.")
-      - $addLabel("critical")
+    run:
+      if: $hasFilePattern("**/transactions")
+      then:
+        - $info("You have changed transactions. Please schedule a meeting.")
+        - $addLabel("critical")

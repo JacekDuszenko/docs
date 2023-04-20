@@ -1,6 +1,5 @@
 workflows:
   - name: add-label-based-on-branch-convention
-    if:
-      - $matchString("(feat|chore)/\\w+", $head())
-    then:
-      - $addLabel($subMatchesString((feat|chore)/\\w+), $head()))
+    run:
+      if: $matchString("(feat|chore)/\\w+", $head())
+      then: $addLabel($subMatchesString((feat|chore)/\\w+), $head()))

@@ -2,8 +2,6 @@ pipelines:
   - name: security-changes
     trigger: $hasFilePattern("services/db/migrations/**")
     stages:
-      - actions:
-          - $assignReviewer(["john"], "random")
+      - actions: $assignReviewer(["john"], "random")
         until: $reviewerStatus("john") == "APPROVED"
-      - actions:
-          - $assignTeamReviewer(["security"])
+      - actions: $assignTeamReviewer(["security"])

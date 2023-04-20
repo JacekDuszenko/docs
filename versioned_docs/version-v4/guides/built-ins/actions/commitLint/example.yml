@@ -1,6 +1,5 @@
 workflows:
   - name: check-conventional-commits
-    if:
-      - $base() == "main"
-    then:
-      - $commitLint()
+    run:
+      if: $base() == "main"
+      then: $commitLint()

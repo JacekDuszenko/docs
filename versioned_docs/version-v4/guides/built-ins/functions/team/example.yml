@@ -1,6 +1,5 @@
 workflows:
   - name: assign-devops-reviewer
-    if:
-      - $isElementOf($author(), $team("devops"))
-    then:
-      - $assignTeamReviewer(["devops"])
+    run:
+      if: $isElementOf($author(), $team("devops"))
+      then: $assignTeamReviewer(["devops"])

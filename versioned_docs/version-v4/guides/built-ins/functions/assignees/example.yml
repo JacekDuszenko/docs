@@ -1,8 +1,5 @@
 workflows:
   - name: by-default-assign-to-author
-    # Run workflow regardless of previous workflow result
-    always-run: true
-    if:
-      - $assignees() == []
-    then:
-      - $assignAssignees([$author()])
+    run:
+      if: $assignees() == []
+      then: $assignAssignees([$author()])

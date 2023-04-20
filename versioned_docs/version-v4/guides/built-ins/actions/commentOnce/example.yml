@@ -1,6 +1,5 @@
 workflows:
   - name: congratulate
-    if:
-      - rule: $pullRequestCountBy($author(), "all") == 1
-        extra-actions:
-          - $commentOnce("Thank you for your first contribution!")
+    run:
+      if: $pullRequestCountBy($author(), "all") == 1
+      then: $commentOnce("Thank you for your first contribution!")

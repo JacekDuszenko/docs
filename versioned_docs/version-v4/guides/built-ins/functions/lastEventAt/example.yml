@@ -1,11 +1,7 @@
-rules:
-  - name: stale-pull-request
-    spec: $lastEventAt() < 30 days ago
-
 workflows:
   - name: stale
-    if:
-      - rule: stale-pull-request
-    then:
-      - $addLabel("stale")
-      - $comment("This pull request has been automatically marked as stale")
+    run:
+      if: $lastEventAt() < 30 days ago
+      then:
+        - $addLabel("stale")
+        - $comment("This pull request has been automatically marked as stale")

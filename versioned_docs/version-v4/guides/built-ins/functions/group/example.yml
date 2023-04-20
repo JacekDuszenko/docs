@@ -12,12 +12,10 @@ groups:
 
 workflows:
   - name: label-with-size
-    if:
-      - $size($group("ignore_paths")) < 10
-    then:
-      - $addLabel("small")
+    run:
+      if: $size($group("ignore_paths")) < 10
+      then: $addLabel("small")
   - name: review-juniors-changes
-    if:
-      - $isElementOf($author(), $group("juniors"))
-    then:
-      - $assignReviewer($group("tech-leads"), 1)
+    run:
+      if: $isElementOf($author(), $group("juniors"))
+      then: $assignReviewer($group("tech-leads"), 1)

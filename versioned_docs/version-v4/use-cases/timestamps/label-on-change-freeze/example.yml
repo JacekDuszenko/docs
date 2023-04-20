@@ -2,13 +2,8 @@ labels:
   do-not-merge:
     color: 294b69
 
-rules:
-  - name: is-change-freeze
-    spec: $createdAt() >= 2022-04-05 && $createdAt() <= 2022-04-15
-
 workflows:
   - name: change-freeze
-    if:
-      - rule: is-change-freeze
-    then:
-      - $addLabel("do-not-merge")
+    run:
+      if: $createdAt() >= 2022-04-05 && $createdAt() <= 2022-04-15
+      then: $addLabel("do-not-merge")

@@ -55,11 +55,10 @@ Here's an example of the error:
 ```yml
 workflows:
   - name: maybe-LGTM
-    if:
-        # This will fail because we are using seconds
-        - rule: $totalCodeReviews() > 1 && $createdAt() < 60 seconds ago
-    then:
-        - $comment("This PR got a fast review. Is it a LGTM?")
+    run:
+      # This will fail because we are using seconds
+      if: $totalCodeReviews() > 1 && $createdAt() < 60 seconds ago
+      then: $comment("This PR got a fast review. Is it a LGTM?")
 ```
 
 ## Built-ins misuse

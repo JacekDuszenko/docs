@@ -25,10 +25,9 @@ Here's an example of a `reviewpad.yml` configuration:
 ```yml
 workflows:
   - name: all-checks-completed
-    if:
-      - $haveAllChecksRunCompleted([], "success")
-    then:
-      - $comment("Hello")
+    run:
+      if: $haveAllChecksRunCompleted([], "success")
+      then: $comment("Hello")
 ```
 
 In this example, if you have 5 checks Reviewpad comment "Hello" 5 times.

@@ -1,10 +1,5 @@
-rules:
-  - name: is-compliant
-    spec: $hasLinkedIssues() && $hasLinearHistory()
-
 workflows:
   - name: assign-reviewers
-    if:
-      - rule: is-compliant
-    then:
-      - $assignRandomReviewer()
+    run:
+      if: $hasLinkedIssues() && $hasLinearHistory()
+      then: $assignRandomReviewer()

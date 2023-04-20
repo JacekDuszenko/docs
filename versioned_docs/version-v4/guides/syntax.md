@@ -7,9 +7,9 @@ slug: "syntax"
 A Reviewpad configuration file has the following shape:
 
 ```yaml
-mode: silent | verbose [OPTIONAL]
-ignore-errors: true | false [OPTIONAL]
-metrics-on-merge: true | false [OPTIONAL]
+mode: silent | verbose
+ignore-errors: true | false
+metrics-on-merge: true | false
 
 extends:
   - configuration_1
@@ -24,16 +24,16 @@ labels:
   label_N
 
 groups:
-  group_1
-  group_2
+  - group_1
+  - group_2
   ...
-  group_N
+  - group_N
 
 rules:
-  rule_1
-  rule_2
+  - rule_1
+  - rule_2
   ...
-  rule_N
+  - rule_N
 
 workflows:
   - workflow_1
@@ -55,41 +55,45 @@ You can check the latest formal version of the format [here](https://github.com/
 
 ## Mode
 
-The `mode` property is a flag that enables or disables Reviewpad's [executed actions report](/guides/reports#executed-actions-report).
+The `mode` property in Reviewpad serves as a flag to turn on or off the generation of the [executed actions report](/guides/reports#executed-actions-report).
 
-By default, Reviewpad runs on `silent` mode.
+This property is optional and can be set to either `silent` or `verbose`.
 
-However, you can choose to use `verbose` mode and Reviewpad will comment on the pull request with the execution results.
+By default, this flag is set to `silent`, which means that Reviewpad will not generate the report. If you prefer, you can switch to `verbose` mode so that Reviewpad will provide feedback on the pull request by commenting with the execution results.
 
 #### Example
 
 ```yml
-mode: verbose # optional
+mode: verbose
 ```
 
 ## Ignore errors
 
-The `ignore-errors` property is a boolean flag that specifies if the Reviewpad should ignore execution errors.
+The `ignore-errors` property is a boolean flag that determines whether or not Reviewpad should disregard any execution errors.
 
-By default, this flag is `false` so Reviewpad will fail if an error is raised.
+This property is optional and can be set to either `true` or `false`.
+
+By default, this flag is set to `false`, which means that Reviewpad will stop and show an error message if any error occurs.
 
 #### Example
 
 ```yml
-ignore-errors: true # optional
+ignore-errors: true
 ```
 
 ## Metrics on merge
 
-The `metrics-on-merge` property is a boolean flag that specifies if Reviewpad should add a metrics report when a pull request is merged.
+The `metrics-on-merge` property is a boolean flag that determines whether or not a metrics report should be added when a pull request is merged.
 
-By default, this flag is `false` so Reviewpad will not add this report.
+This property is optional and can be set to either `true` or `false`.
 
-The metrics report includes the following metrics:
+By default, this flag is set to `false`, so a report will not be added.
 
-- `Coding Time`: the time it took from the first commit until the pull request was issued;
-- `Pickup Time`: the time since the pull request was issued until its first review;
-- `Review Time`: the time from the first review until the pull request was merged.
+If the flag is set to `true`, the metrics report will include the following information:
+
+- `Coding Time`: the duration between the first commit and the issuance of the pull request;
+- `Pickup Time`: the duration between the issuance of the pull request and its first review;
+- `Review Time`: the duration between the first review and the merge of the pull request.
 
 ![Reviewpad metrics report](/img/reports/metrics.png)
 
@@ -101,11 +105,13 @@ metrics-on-merge: true
 
 ## Extends
 
-The `extends` property extends other Reviewpad configurations represented as GitHub blob URLs (e.g. `https://github.com/reviewpad/reviewpad/blob/main/reviewpad.yml`).
+The `extends` property allows you to extend other Reviewpad configurations by using their GitHub blob URLs (for example, `https://github.com/reviewpad/reviewpad/blob/main/reviewpad.yml`).
 
-If the URL is not a GitHub blob, an error will be raised.
+This property is optional and can be set to a list of GitHub blob URLs.
 
-The exact semantics of the `extends` mechanism is described on this [page](/guides/extends).
+Note that if the URL isn't a GitHub blob, an error will occur.
+
+For more information on the `extends` mechanism, please visit this [page](/guides/extends).
 
 ### Example
 
@@ -116,7 +122,7 @@ extends:
 
 ## Label
 
-A label specifies a label that can be used as an argument to the label related functions.
+A label specifies a label that can be used as an argument to the label-related functions.
 
 The structure of a label is as follows:
 
@@ -127,10 +133,10 @@ LABEL-ID:
   color: STRING [OPTIONAL]
 ```
 
--   `LABEL-ID` of a label is used to reference it in other entities. If no `name` is provided, then the `LABEL-ID` is considered the `name`.
--   `name` [OPTIONAL] is the name of the label as seen on GitHub.
--   `description` [OPTIONAL] is a short description of the label. Must be 100 characters or fewer.
--   `color` [OPTIONAL] is the [hexadecimal color code](https://www.color-hex.com/) for the label, with or without the leading `#`.
+- `LABEL-ID` is used to reference the label in other entities, and if no name is provided, the `LABEL-ID` is considered the name.
+- `name` [OPTIONAL] is the name of the label as seen on GitHub.
+- `description` [OPTIONAL] is a short description of the label. Must be 100 characters or fewer.
+- `color` [OPTIONAL] is the [hexadecimal color code](https://www.color-hex.com/) for the label, with or without the leading `#`.
 
 If the label does not exist in the repository, it will be created.
 
@@ -164,7 +170,7 @@ There are two ways to specify a group:
 -   `name` of a group is used to reference it in other entities.
 -   `description` [OPTIONAL] is a string that can be used to provide more details about the group.
 -   `kind` [OPTIONAL] of group can only be _developers_ at the moment.
--   `spec` is an [Aladino](/guides/aladino/specification) array.
+-   `spec` is an array of [Aladino](/guides/aladino/specification) specifications.
 
 #### Example
 
@@ -183,7 +189,7 @@ groups:
   description: STRING [OPTIONAL]
   kind: developers
   type: filter
-  param: VARIABLE
+  param: VARIABLE-NAME
   where: ALADINO-BOOLEAN-EXPRESSION
 ```
 
@@ -208,7 +214,7 @@ groups:
 
 ## Rule
 
-A Reviewpad rule specifies a boolean condition on a pull request.
+A Reviewpad rule specifies a boolean condition on a pull request or issue.
 
 The structure of a rule is as follows:
 
@@ -236,7 +242,7 @@ rules:
 
 ## Workflow
 
-A `workflow` is a specification of a list of actions to be executed if the pull request **satisfies** any of the specified rules.
+A `workflow` is a specification of a list of actions to be executed if the pull request / issues **satisfies** any of the specified rules.
 
 The structure of a workflow is as follows:
 
@@ -246,43 +252,109 @@ The structure of a workflow is as follows:
   always-run: BOOLEAN [OPTIONAL]
   on:
     - [pull_request | issue]
-  if:
-    - rule: REF_TO_RULE_1 | INLINE_RULE_1
-      extra-actions: [OPTIONAL]
-        - ACTION_1
-        - ACTION_2
-        ...
-        - ACTION_N
-    ...
-    - rule: REF_TO_RULE_N | INLINE_RULE_N
-  then: [OPTIONAL]
+  run:
     - ACTION_1
-    - ACTION_2
+    - if: REF_TO_RULE_1 | INLINE_RULE_1
+      then: ACTION_2
+      else: ALTERNATIVE_ACTION_2
     ...
     - ACTION_N
 ```
 
--   `name` is a string that identifies the workflows.
--   `description` [OPTIONAL] is a string that can be used to provide more details about the workflow.
--   `always-run` [OPTIONAL] field is a boolean that specifies if the workflow should run regardless of whether the previous workflows ran or not. If `true` then the workflow will always run. If `false` then the workflow will run only if none of the previous workflows have run. By default, this field is `false`. For instance, if workflow B has a precedent workflow A and both have `always-run: false` then workflow B will run only if workflow A has not run. If workflow B has `always-run: true` then it will run regardless of whether workflow A has run or not.
--   `on` [OPTIONAL] field is a list of GitHub entity types that should trigger the workflow. By default, the value is `pull_request`.
--   `if` field specifies which rules should be checked. For each rule, we can also specify a list of **extra actions** that will be executed if this rule is activated by the pull request.
--   `then` field is a list of [Reviewpad actions](/guides/built-ins#actions) that should run.
+- `name` is a string that identifies the workflows.
+- `description` [OPTIONAL] is a string that can be used to provide more details about the workflow.
+- `always-run` [OPTIONAL] field is a boolean that specifies if the workflow should run regardless of whether the previous workflows ran or not. If `true` then the workflow will always run. If `false` then the workflow will run only if none of the previous workflows have run. By default, this field is `false`. For instance, if workflow B has a precedent workflow A and both have `always-run: false` then workflow B will run only if workflow A has not run. If workflow B has `always-run: true` then it will run regardless of whether workflow A has run or not.
+- `on` [OPTIONAL] field is a list of GitHub entity types that should trigger the workflow. By default, the value is `pull_request`.
+- `run` field specifies the action or the list of actions to be executed in the workflow:
+    - `if` field specifies the condition that should be satisfied for the `then` field to run. The `if` field can be a reference to a rule by its name or an inline rule.
+    - `then` field defines the [Reviewpad action](/guides/built-ins#actions) or the list of [Reviewpad actions](/guides/built-ins#actions) to run when `if` evaluates to true.
+    - `else` field defines the [Reviewpad action](/guides/built-ins#actions) or the list of [Reviewpad actions](/guides/built-ins#actions) to run when `if` evaluates to false. This field is optional.
+
+<!-- define ancho as workflow-run -->
+### `run` {#workflow-run}
+
+The `run` field can be a single action or a list of actions. An action is an [Aladino](/guides/aladino/specification) expression to be executed.
+
+We can also use the `if ... then ... else` conditional actions to specify a list of actions to run depending on the evaluation of the `if` field.
+
+#### Single action
+
+```yml
+workflows:
+  - name: label
+    run: $addLabel("bug")
+```
+
+#### List of actions
+
+```yml
+workflows:
+  - name: label
+    run:
+      - $addLabel("bug")
+      - $addLabel("documentation")
+```
+
+#### Conditional actions
+
+```yml
+workflows:
+  - name: label
+    run:
+      - $addLabel("bug")
+      - $addLabel("documentation")
+      - if: $size() < 100
+        then: $addLabel("small")
+        else: $addLabel("large")
+```
+
+The above configuration specifies one workflow called `label` which automatically labels pull requests with `bug` and `documentation` labels. If the pull request size is less than 100 then the `small` label is added. Otherwise, a `large` label is added.
+
+For a pull request with size 150, the labels `bug`, `documentation`, and `medium` will be added.
+
+##### Nested conditional actions
+
+We can also nest conditional actions by using the `then` and `else` fields.
+
+```yml
+workflows:
+  - name: label
+    run:
+      - $addLabel("bug")
+      - $addLabel("documentation")
+      - if: $size() < 100
+        then: $addLabel("small")
+        else:
+          - if: $size() < 500
+            then: $addLabel("medium")
+            else: $addLabel("large")
+```
+
+In the above example, for a pull request with size 150, the labels `bug`, `documentation`, and `medium` will be added.
+
+It is also important to note both the `then` and `else` fields can have a single action or a list of actions.
 
 #### Example
 
-```yaml
+```yml
 workflows:
-  - name: size-labelling
-    description: Label pull request based on size # optional
-    on: # optional
-      - pull_request
-    if:
-      - rule: $size() < 90
-        extra-actions: $addLabel("small")
+  - name: label
+    run:
+      - $addLabel("bug")
+      - $addLabel("documentation")
+      - if: $size() < 100
+        then:
+          # Run a list of actions
+          - $addLabel("small")
+          - $info("The pull request size is small")
+        else:
+          # Run a list of actions
+          - $addLabel("large")
+          - if: $size() > 500
+            # Run a single action
+            then: $info("The pull request size is very large")
+          - $assignRandomReviewer()
 ```
-
-This configuration specifies one workflow called `size-labelling` which automatically labels a `pull_request` with the label `small` if the inline rule `$size() < 90` is true. This means that the total number of changed lines i.e. `$size` is lower than 90.
 
 ## Pipeline
 
@@ -317,14 +389,14 @@ The structure of a pipeline is as follows:
 
 ```yaml
 pipelines:
-    - name: security-changes
-    trigger: '$hasFilePattern("services/db/migrations/**")'
+  - name: security-changes
+    trigger: $hasFilePattern("services/db/migrations/**")
     stages:
-        - actions:
-                - '$assignReviewer(["john"], "reviewpad")'
-            until: $reviewerStatus("john") == "APPROVED"
-        - actions:
-                - '$assignTeamReviewer(["security"])'
+      - actions:
+          - $assignReviewer(["john"], "reviewpad")
+        until: $reviewerStatus("john") == "APPROVED"
+      - actions:
+          - $assignTeamReviewer(["security"])
 ```
 
-This configuration specifies one pipeline called `security-changes` which is triggered when there are changes to the files in the database migration, and these files will be first reviewed by john and only when john approves the changes, they will be reviewed by the security team.
+This configuration specifies one pipeline called `security-changes` which is triggered when there are changes to the files in the database migration. After triggering the pipeline, the first stage will assign the reviewer `john` to the pull request and only when `john` approves the changes, the second stage will be triggered and the security team will be assigned to review the pull request.

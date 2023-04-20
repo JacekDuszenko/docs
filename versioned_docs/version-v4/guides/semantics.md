@@ -25,10 +25,8 @@ rules:
 
 workflows:
   - name: fast-track
-    if:
-      - $fileCount == 1
-    then:
-      - $addLabel("fast-track")
+    if: $fileCount == 1
+    then: $addLabel("fast-track")
 ```
 
 ### Reference to undefined rule
@@ -46,10 +44,8 @@ rules:
 
 workflows:
   - name: fast-track
-    if:
-      - rule: changes-one-file
-    then:
-      - $addLabel("fast-track")
+    if: $rule("changes-one-file")
+    then: $addLabel("fast-track")
 ```
 
 ## Interpreter
@@ -95,21 +91,16 @@ workflows:
     description: Workflow 1 # optional
     on: # optional
       - pull_request
-    if:
-      - rule: rule_1
-    then:
-      - action_1
+    if: $rule("rule_1")
+    then: action_1
 
   - name: workflow_2
     description: Workflow 2 # optional
     on: # optional
       - issue
       - pull_request
-    if:
-      - rule: rule_1
-      - rule: rule_2
-    then:
-      - action_2
+    if: $rule("rule_1") || $rule("rule_2")
+    then: action_2
 
 pipelines:
   - name: pipeline_1
@@ -120,8 +111,7 @@ pipelines:
           - action_3
           - action_4
         until: rule_4 # optional
-      - actions:
-          - action_5
+      - actions: action_5
         until: rule_5 # optional
 ```
 
@@ -151,21 +141,19 @@ rules:
 
 workflows:
   - name: workflow_X
-    if:
-      - rule: rule_1
-        extra-actions:
+    run:
+      - if: rule_1
+        then:
           - rule_1_action_1
           - rule_1_action_2
-      - rule: rule_2
-        extra-actions:
-          - rule_2_action_1
-      - rule: rule_3
-      - rule: rule_4
-        extra-actions:
-          - rule_4_action_1
-    then:
-      - gen_action_1
-      - gen_action_2
+      - if: rule_2
+        then: rule_2_action_1
+      - if: rule_4
+        then: rule_4_action_1
+      - if: rule_1 || rule_2 || rule_3 || rule_4
+        then:
+          - gen_action_1
+          - gen_action_2
 
 pipelines:
   - name: pipeline_Y
@@ -175,8 +163,7 @@ pipelines:
           - stage_1_action_1
           - stage_2_action_2
         until: rule_6
-      - actions:
-          - stage_2_action_1
+      - actions: stage_2_action_1
         until: rule_7
 ```
 
@@ -215,11 +202,9 @@ pipelines:
   - name: pipeline_1
     trigger: initial-condition
     stages:
-      - actions:
-          - ACTION_1
+      - actions: ACTION_1
         until: RULE_1
-      - actions:
-          - ACTION_2
+      - actions: ACTION_2
         until: RULE_2
 ```
 
@@ -230,14 +215,12 @@ workflows:
   - name: pipeline_1_stage_1
     always-run: true
     if: initial-condition && !RULE_1
-    then:
-      - ACTION_1
+    then: ACTION_1
 
   - name: pipeline_1_stage_2
     always-run: true
     if: initial-condition && RULE_1 && !RULE_2
-    then:
-      - ACTION_2
+    then: ACTION_2
 ```
 
 However there are two major disadvantages of this approach:

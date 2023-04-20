@@ -1,6 +1,5 @@
 workflows:
   - name: assign-reviewers
-    if:
-      - rule: $isElementOf("bug", $labels())
-    then:
-      - $assignTeamReviewer(["testers"])
+    run:
+      if: $isElementOf("bug", $labels())
+      then: $assignTeamReviewer(["testers"])

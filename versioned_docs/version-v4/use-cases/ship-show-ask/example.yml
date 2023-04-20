@@ -16,29 +16,26 @@ groups:
 workflows:
   - name: ask
     description: Ask process - request a review before merge
-    if:
-      - $hasFileName("main.js")
-      - $fileCount() > 5
-      - $isElementOf($author(), $group("juniors"))
-    then:
-      - $addLabel("ask")
-      - $assignRandomReviewer()
+    run:
+      if: $hasFileName("main.js") || $fileCount() > 5 || $isElementOf($author(), $group("juniors"))
+      then:
+        - $addLabel("ask")
+        - $assignRandomReviewer()
 
   - name: show
     description: Show process - auto-merge and later review
-    if:
-      - rule: $hasFileExtensions([".md"])
-        extra-actions:
-          - $assignReviewer($group("seniors"), "reviewpad")
-      - $hasFileExtensions([".test.ts"])
-    then:
-      - $addLabel("show")
-      - $merge("rebase")
+    run:
+      - if: $hasFileExtensions([".md"])
+        then: $assignReviewer($group("seniors"), "reviewpad")
+      - if: $hasFileExtensions([".md"]) || $hasFileExtensions([".test.ts"])
+        then:
+          - $addLabel("show")
+          - $merge("rebase")
 
   - name: ship
     description: Ship process - auto-merge without need for review
-    if:
-      - $size() < 50
-    then:
-      - $addLabel("ship")
-      - $merge("rebase")
+    run:
+      if: $size() < 50
+      then:
+        - $addLabel("ship")
+        - $merge("rebase")

@@ -1,9 +1,7 @@
 workflows:
   - name: label-change-type
-    if:
-      - rule: $startsWith($head(), "feat/")
-        extra-actions:
-          - $addLabel("feature")
-      - rule: $startsWith($head(), "fix/")
-        extra-actions:
-          - $addLabel("fix")
+    run:
+      - if: $startsWith($head(), "feat/")
+        then: $addLabel("feature")
+      - if: $startsWith($head(), "fix/")
+        then: $addLabel("fix")

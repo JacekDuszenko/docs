@@ -1,10 +1,5 @@
-rules:
-  - name: is-junior-author
-    spec: $totalCodeReviews($author()) < 5
-
 workflows:
   - name: assign-reviewers
-    if:
-      - rule: is-junior-author
-    then:
-      - $assignReviewer($team("seniors"), 1, "reviewpad")
+    run:
+      if: $totalCodeReviews($author()) < 5
+      then: $assignReviewer($team("seniors"), 1, "reviewpad")

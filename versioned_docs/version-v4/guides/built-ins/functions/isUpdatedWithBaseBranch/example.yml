@@ -1,6 +1,5 @@
 workflows:
   - name: rebase
-    if:
-      - '!$isUpdatedWithBaseBranch()'
-    then:
-      - $rebase()
+    run:
+      if: '!$isUpdatedWithBaseBranch()'
+      then: $rebase()

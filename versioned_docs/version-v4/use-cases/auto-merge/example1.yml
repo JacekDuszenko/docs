@@ -3,15 +3,11 @@ labels:
     description: Ship mode
     color: 76dbbe
 
-rules:
-  - name: only-docs-changes
-    spec: $hasFileExtensions([".md"])
-
 workflows:
   - name: ship
     description: Ship process - bypass the review and merge with rebase
-    if:
-      - rule: only-docs-changes
-    then:
-      - $addLabel("ship")
-      - $merge()
+    run:
+      if: $hasFileExtensions([".md"])
+      then:
+        - $addLabel("ship")
+        - $merge()

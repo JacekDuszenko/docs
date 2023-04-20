@@ -1,7 +1,7 @@
 workflows:
   - name: set-project-field
-    if:
-        - $hasLinkedIssues() == false
-    then:
+    run:
+      if: $hasLinkedIssues() == false
+      then:
         - $addToProject("jupiter", "in progress")
         - $setProjectField("jupiter", "notes", "missing issue")

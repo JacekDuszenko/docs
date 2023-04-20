@@ -1,6 +1,5 @@
 workflows:
   - name: conflicts
-    if:
-      - rule: $hasGitConflicts() == false
-        extra-actions:
-          - $removeLabel("git-conflicts")
+    run:
+      if: $hasGitConflicts() == false
+      then: $removeLabel("git-conflicts")

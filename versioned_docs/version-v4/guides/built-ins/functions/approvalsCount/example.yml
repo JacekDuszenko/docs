@@ -1,6 +1,5 @@
 workflows:
   - name: auto-merge
-    if:
-      - $approvalsCount() > 2
-    then:
-      - $merge()
+    run:
+      if: $approvalsCount() > 2
+      then: $merge()
