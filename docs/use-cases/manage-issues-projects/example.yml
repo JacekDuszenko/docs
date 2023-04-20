@@ -2,10 +2,8 @@ workflows:
   - name: manage-issues-in-projects
     on:
       - issue
-    if:
-      - rule: '$state() == "open" && !$isLinkedToProject("PROJECT-TITLE")'
-        extra-actions:
-          - $addToProject("PROJECT-TITLE", "Todo")
-      - rule: $state() == "closed"
-        extra-actions:
-          - $addToProject("PROJECT-TITLE", "Done")
+    run:
+      - if: '$state() == "open" && !$isLinkedToProject("PROJECT-TITLE")'
+        then: $addToProject("PROJECT-TITLE", "Todo")
+      - if: $state() == "closed"
+        then: $addToProject("PROJECT-TITLE", "Done")

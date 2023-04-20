@@ -11,14 +11,9 @@ groups:
     param: developer
     where: $pullRequestCountBy($developer) < 10
 
-rules:
-  - name: authored-by-new-joiner
-    spec: $isElementOf($author(), $group("new-joiners"))
-
 workflows:
   - name: critical
     description: Modifications by new joiners require careful review
-    if:
-      - rule: authored-by-new-joiner
-    then:
-      - $addLabel("new-joiner")
+    run:
+      if: $isElementOf($author(), $group("new-joiners"))
+      then: $addLabel("new-joiner")

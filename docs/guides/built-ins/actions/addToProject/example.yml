@@ -1,6 +1,5 @@
 workflows:
   - name: add-to-project
-    if:
-        - $hasLinkedIssues() == false
-    then:
-        - $addToProject("jupiter", "in progress")
+    run:
+      if: $hasLinkedIssues() == false
+      then: $addToProject("jupiter", "in progress")

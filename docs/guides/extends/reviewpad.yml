@@ -5,7 +5,6 @@ extends:
 workflows:
   - name: small-size
     always-run: true
-    if:
-      - $size() < 30
-    then:
-      - $info("this is a small pr")
+    run:
+      if: $size() < 30
+      then: $info("this is a small pr")

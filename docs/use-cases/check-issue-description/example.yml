@@ -3,8 +3,6 @@ workflows:
     on:
       - issue
       - pull_request
-    always-run: true
-    if:
-      - $description() == ""
-    then:
-      - $error("The description is empty. Please add more information!")
+    run:
+      if: $description() == ""
+      then: $error("The description is empty. Please add more information!")

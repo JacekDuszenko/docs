@@ -1,11 +1,5 @@
-rules:
-  - name: is-ready-to-review
-    # The expression is wrapped in quotes to avoid YAML parsing errors
-    spec: '!$isDraft() && $hasLinkedIssues() && $hasLinearHistory()'
-
 workflows:
   - name: distribute-review
-    if:
-      - rule: is-ready-to-review
-    then:
-      - $assignRandomReviewer()
+    run:
+      if: '!$isDraft() && $hasLinkedIssues() && $hasLinearHistory()'
+      then: $assignRandomReviewer()

@@ -1,7 +1,6 @@
 workflows:
   - name: check-compliance
-    if:
+    run:
       # Verify size ignoring lock files
-      - $size(["*.lock"]) > 100
-    then:
-      - $error("Change is too big")
+      if: $size(["*.lock"]) > 100
+      then: $error("Change is too big")

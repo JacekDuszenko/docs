@@ -1,6 +1,5 @@
 workflows:
   - name: thank-contributors
-    if:
-      - $state() == "closed"
-    then:
-      - $info("Thanks for your contribution!")
+    run:
+      if: $state() == "closed"
+      then: $info("Thanks for your contribution!")

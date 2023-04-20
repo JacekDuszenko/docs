@@ -1,6 +1,5 @@
 workflows:
   - name: label-small-pull-request
-    if:
-      - $size() < 10
-    then:
-      - $addLabel("small")
+    run:
+      if: $size() < 10
+      then: $addLabel("small")

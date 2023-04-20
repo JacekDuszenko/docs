@@ -1,6 +1,5 @@
 workflows:
   - name: label-rebaseable
-    if:
-      - rule: $selectFromJSON($toJSON($context), "$.rebaseable") == "true"
-    then:
-      - $addLabel("rebaseable")
+    run:
+      if: $selectFromJSON($toJSON($context), "$.rebaseable") == "true"
+      then: $addLabel("rebaseable")

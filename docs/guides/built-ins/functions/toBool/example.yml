@@ -1,6 +1,5 @@
 workflows:
   - name: label-locked
-    if:
-      - rule: $toBool($selectFromContext("$.locked"))
-    then:
-      - $addLabel("locked")
+    run:
+      if: $toBool($selectFromContext("$.locked"))
+      then: $addLabel("locked")

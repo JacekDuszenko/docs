@@ -1,8 +1,7 @@
 workflows:
   - name: merge
-    if:
+    run:
       # Verify if any reviewer approved the pull request.
       # The expression is wrapped in quotes to avoid YAML parsing errors.
-      - '$any($reviewers(), ($r: String => $reviewerStatus($r) == "APPROVED"))'
-    then:
-      - $merge()
+      if: '$any($reviewers(), ($r: String => $reviewerStatus($r) == "APPROVED"))'
+      then: $merge()

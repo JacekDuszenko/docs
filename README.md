@@ -2,6 +2,11 @@
 
 This repo contains the source powering up [docs.reviewpad.com](https://docs.reviewpad.com)
 
+> **Warning**
+>
+> When updating the documentation you only need to update the files inside the `docs` folder.
+> The files under `versioned_docs` and `versioned_sidebars` are automatically generated.
+
 ## Getting started
 
 ### Prerequisites
@@ -96,6 +101,12 @@ git checkout -b THE-NAME-OF-MY-BRANCH
 
 1. Follow the ["Running locally"](#running-locally) instructions
 2. Save the files and check in the browser
+
+
+> **Warning**
+>
+> When updating the documentation you only need to update the files inside the `docs` folder.
+> The files under `versioned_docs` and `versioned_sidebars` are automatically generated.
 
 ### Test the change
 

@@ -1,6 +1,5 @@
 workflows:
   - name: trivial-changes
-    if:
-      - $hasFileExtensions([".md"])
-    then:
-      - $approve("LGTM")
+    run:
+      if: $hasFileExtensions([".md"])
+      then: $approve("LGTM")

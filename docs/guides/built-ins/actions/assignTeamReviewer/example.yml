@@ -1,6 +1,5 @@
 workflows:
   - name: reviewers-assignment
-    if:
-      - $hasCodePattern("critical\(.*\)")
-    then:
-      - $assignTeamReviewer(["core"])
+    run:
+      if: $hasCodePattern("critical\(.*\)")
+      then: $assignTeamReviewer(["core"])

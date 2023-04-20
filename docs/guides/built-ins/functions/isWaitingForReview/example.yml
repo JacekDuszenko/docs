@@ -1,9 +1,7 @@
 workflows:
   - name: attention-set
-    if:
-      - rule: $isWaitingForReview()
-        extra-actions:
-          - $addLabel("waiting-for-review")
-      - rule: $hasUnaddressedThreads()
-        extra-actions:
-          - $addLabel("requires-author-attention")
+    run:
+      - if: $isWaitingForReview()
+        then: $addLabel("waiting-for-review")
+      - if: $hasUnaddressedThreads()
+        then: $addLabel("requires-author-attention")

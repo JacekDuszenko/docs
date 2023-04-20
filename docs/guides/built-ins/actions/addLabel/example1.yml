@@ -7,9 +7,9 @@ labels:
 
 workflows:
   - name: add-label
-    if:
-      - rule: $size() < 10
-        extra-actions:
-          - $addLabel("small")  # creates the label "Small Change" with description "Few files"
-          - $addLabel("medium") # creates the label "medium" with description "Some files"
-          - $addLabel("large")  # creates the label "large" without description
+    run:
+      if: $size() < 10
+      then:
+        - $addLabel("small")  # creates the label "Small Change" with description "Few files"
+        - $addLabel("medium") # creates the label "medium" with description "Some files"
+        - $addLabel("large")  # creates the label "large" without description

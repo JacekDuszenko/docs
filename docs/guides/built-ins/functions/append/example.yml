@@ -5,7 +5,6 @@ groups:
 
 workflows:
   - name: reviewer-assignment
-    if:
-      - $description() != ""
-    then:
-      - $assignReviewer($group("all-devs"), 1)
+    run:
+      if: $description() != ""
+      then: $assignReviewer($group("all-devs"), 1)

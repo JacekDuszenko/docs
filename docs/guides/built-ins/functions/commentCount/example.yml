@@ -1,6 +1,5 @@
 workflows:
   - name: high-activity
-    if:
-      - $commentCount() > 15
-    then:
-      - $info("Please consider splitting the pull request into smaller pull requests.")
+    run:
+      if: $commentCount() > 15
+      then: $info("Please consider splitting the pull request into smaller pull requests.")

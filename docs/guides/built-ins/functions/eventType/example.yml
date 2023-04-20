@@ -1,13 +1,11 @@
 workflows:
   - name: assign-reviewer-when-pr-ready-for-review
-    if:
-      - $eventType() == "ready_for_review"
-    then:
-      - $assignRandomReviewer()
+    run:
+      if: $eventType() == "ready_for_review"
+      then: $assignRandomReviewer()
   - name: add-to-project-when-issue-opened
     on:
       - issue
-    if:
-      - $eventType() == "opened"
-    then:
-      - $addToProject("project-title", "column")
+    run:
+      if: $eventType() == "opened"
+      then: $addToProject("project-title", "column")

@@ -1,7 +1,6 @@
 workflows:
   - name: long-live
-    if:
+    run:
       # Verify if the pull request was created more than 10 days ago
-      - $createdAt() < 10 days ago
-    then:
-      - $info("This pull request is old. Please consider closing it.")
+      if: $createdAt() < 10 days ago
+      then: $info("This pull request is old. Please consider closing it.")

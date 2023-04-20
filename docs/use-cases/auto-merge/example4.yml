@@ -1,10 +1,5 @@
-rules:
-  - name: changes-critical-code
-    spec: $hasAnnotation("critical")
-
 workflows:
   - name: auto-merge-on-required-approvals
-    if:
-      - $rule("changes-critical-code") && $hasRequiredApprovals(2, $team("core"))
-    then:
-      - $merge()
+    run:
+      if: $hasAnnotation("critical") && $hasRequiredApprovals(2, $team("core"))
+      then: $merge()

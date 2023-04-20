@@ -1,6 +1,5 @@
 workflows:
   - name: LGTM
-    if:
-      - $hasCodeWithoutSemanticChanges()
-    then:
-      - $approve("LGTM")
+    run:
+      if: $hasCodeWithoutSemanticChanges()
+      then: $approve("LGTM")

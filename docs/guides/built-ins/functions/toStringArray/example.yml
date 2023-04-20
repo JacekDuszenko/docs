@@ -5,7 +5,6 @@ groups:
 
 workflows:
   - name: warn-outdated-labels
-    if:
-      - rule: '$any($toStringArray($selectFromContext("$.labels[*].name")), ($label: String => $isElementOf($label, $group("deprecated-labels"))))'
-    then:
-      - $warn($sprintf("Please do not use the deprecated labels %s", [$join($group("deprecated-labels"), ", ")]))
+    run:
+      if: '$any($toStringArray($selectFromContext("$.labels[*].name")), ($label: String => $isElementOf($label, $group("deprecated-labels"))))'
+      then: $warn($sprintf("Please do not use the deprecated labels %s", [$join($group("deprecated-labels"), ", ")]))

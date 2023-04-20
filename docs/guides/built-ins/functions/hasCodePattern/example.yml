@@ -1,7 +1,7 @@
 workflows:
   - name: critical-code
-    if:
-      - $hasCodePattern("placeBet\(.*\)")
-    then:
-      - $assignReviewer($team("core"), 1)
-      - $addLabel("critical")
+    run:
+      if: $hasCodePattern("placeBet\(.*\)")
+      then:
+        - $assignReviewer($team("core"), 1)
+        - $addLabel("critical")

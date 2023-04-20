@@ -1,7 +1,7 @@
 workflows:
   - name: configuration-changes
-    if:
-      - $hasFileName("Dockerfile")
-    then:
-      - $assignTeamReviewer(["devops"])
-      - $addLabel("devops")
+    run:
+      if: $hasFileName("Dockerfile")
+      then:
+        - $assignTeamReviewer(["devops"])
+        - $addLabel("devops")

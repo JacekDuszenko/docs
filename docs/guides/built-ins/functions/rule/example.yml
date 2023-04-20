@@ -8,7 +8,6 @@ rules:
 
 workflows:
   - name: check-compliance
-    if:
-      - rule: is-compliant
-    then:
-      - $assignRandomReviewer()
+    run:
+      if: is-compliant
+      then: $assignRandomReviewer()

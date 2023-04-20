@@ -1,19 +1,9 @@
-rules:
-  - name: changes-env-var
-    description: Patch includes changes to environment variables
-    spec: $hasCodePattern("ENV_*")
-  - name: includes_gh_token
-    description: Patch includes a GitHub token
-    spec: $hasCodePattern("gh_*")
-
 workflows:
   - name: critical
-    if:
-      - rule: changes-env-var
-    then:
-      - $addLabel("critical")
+    run:
+      if: $hasCodePattern("ENV_*")
+      then: $addLabel("critical")
   - name: security
-    if:
-      - rule: includes_gh_token
-    then:
-      - $fail("Patch includes a GitHub token")
+    run:
+      if: $hasCodePattern("gh_*")
+      then: $fail("Patch includes a GitHub token")

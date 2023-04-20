@@ -1,6 +1,5 @@
 workflows:
   - name: merge
-    if:
-      - $hasRequiredApprovals(2, $team("core"))
-    then:
-      - $merge()
+    run:
+      if: $hasRequiredApprovals(2, $team("core"))
+      then: $merge()
