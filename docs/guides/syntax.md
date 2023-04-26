@@ -249,7 +249,6 @@ The structure of a workflow is as follows:
 ```yaml
 - name: STRING
   description: STRING [OPTIONAL]
-  always-run: BOOLEAN [OPTIONAL]
   on:
     - [pull_request | issue]
   run:
@@ -263,7 +262,6 @@ The structure of a workflow is as follows:
 
 - `name` is a string that identifies the workflows.
 - `description` [OPTIONAL] is a string that can be used to provide more details about the workflow.
-- `always-run` [OPTIONAL] field is a boolean that specifies if the workflow should run regardless of whether the previous workflows ran or not. If `true` then the workflow will always run. If `false` then the workflow will run only if none of the previous workflows have run. By default, this field is `false`. For instance, if workflow B has a precedent workflow A and both have `always-run: false` then workflow B will run only if workflow A has not run. If workflow B has `always-run: true` then it will run regardless of whether workflow A has run or not.
 - `on` [OPTIONAL] field is a list of GitHub entity types that should trigger the workflow. By default, the value is `pull_request`.
 - `run` field specifies the action or the list of actions to be executed in the workflow:
     - `if` field specifies the condition that should be satisfied for the `then` field to run. The `if` field can be a reference to a rule by its name or an inline rule.

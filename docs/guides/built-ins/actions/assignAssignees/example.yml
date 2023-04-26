@@ -1,6 +1,5 @@
 workflows:
   - name: assign-core-team
-    always-run: true
     run:
       if: $author() == "renovate[bot]"
       then: $assignAssignees($team("core"), 1)

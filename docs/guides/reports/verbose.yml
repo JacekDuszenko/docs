@@ -2,13 +2,11 @@ mode: verbose
 
 workflows:
   - name: validate-linked-issue
-    always-run: true
     run:
       if: $hasLinkedIssues() == false
       then: $info("This pull request does not have a linked issue")
 
   - name: validate-description
-    always-run: true
     run:
       if: $description() == ""
       then:

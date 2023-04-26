@@ -17,9 +17,9 @@ workflows:
     run:
       - if: $startsWith($head(), "bugfix/")
         then: $addLabel("type-bugfix")
-      - rule: $startsWith($head(), "feature/")
+      - if: $startsWith($head(), "feature/")
         then: $addLabel("type-feature")
-      - rule: $startsWith($head(), "support/")
+      - if: $startsWith($head(), "support/")
         then: $addLabel("type-support")
 
   - name: default-policy
@@ -30,7 +30,6 @@ workflows:
       - '$warn("All branches must use the following nomenclature: prefix/name where prefix can be one of: bugfix, enhancement, feature, hotfix or support.")'
 
   - name: require-linear-history
-    always-run: true
     run:
       if: $hasLinearHistory() == false
       then: $warn("This pull request does not have linear history - please fix this!")
