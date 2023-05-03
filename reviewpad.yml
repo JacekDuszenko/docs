@@ -1,50 +1,22 @@
-api-version: reviewpad.com/v3.x
-
 extends:
   - https://github.com/reviewpad/.github/blob/main/reviewpad-models/common.yml
-
-groups:
-  - name: maintainers
-    spec: '["marcelosousa", "ferreiratiago", "shay2025", "zolamk", "reviewpad-bot"]'
-
-rules:
-  - name: authored-by-maintainer
-    spec: $isElementOf($author(), $group("maintainers"))
 
 workflows:
   # Check that the use cases are updated properly
   - name: changes-to-use-cases
     always-run: true
-    if:
-      - $hasFilePattern("docs/use-cases/**")
-    then:
-      - $info("Adding a new use case? Please update the [sidebars.js](/reviewpad/docs/blob/main/sidebars.js)")
-      - $info("Adding a new use case? Please run the `checker`. You can find more information about the `checker` in [RELEASE.md](/reviewpad/docs/blob/main/RELEASE.md#test-the-reviewpad-configurations)")
+    run:
+      - if: $hasFilePattern("docs/use-cases/**")
+        then:
+          - $info("Adding a new use case? Please update the [sidebars.js](/reviewpad/docs/blob/main/sidebars.js)")
+          - $info("Adding a new use case? Please run the `checker`. You can find more information about the `checker` in [RELEASE.md](/reviewpad/docs/blob/main/RELEASE.md#test-the-reviewpad-configurations)")
 
   # Check that the built-ins are updated properly
   - name: changes-built-ins
     always-run: true
-    if:
-      - $hasFilePattern("docs/guides/built-ins/actions/**") || $hasFilePattern("docs/guides/built-ins/functions/**")
-    then:
-      - $info("Adding a new built-in? Please update the [built-ins.mdx](/reviewpad/docs/blob/main/docs/guides/built-ins/built-ins.mdx)")
-      - $info("Adding a new built-in? Please add a `caution` section if the built-in is not supported for both pull request and issue")
-      - $info("Adding a new built-in? Please run the `checker` on the built-in reviewpad examples. You can find more information about the `checker` in [RELEASE.md](/reviewpad/docs/blob/main/RELEASE.md#test-the-reviewpad-configurations)")
-
-pipelines:
-  # When the pull request is in ship mode
-  - name: ship-mode
-    trigger: $rule("is-ship")
-    stages:
-      - actions:
-          - $error("Only maintainers can use ship mode. Please choose another pull request merge strategy.")
-        until: $isElementOf($author(), $group("maintainers"))
-      - actions:
-          - $error("Pull request cannot be in ship state when in draft mode.")
-        until: '!$isDraft()'
-      - actions:
-          - $error("Pull request cannot be in ship state when it has do-not-merge label.")
-        until: '!$isElementOf("do-not-merge", $labels())'
-      - actions:
-          - $approve("Pull request is in ship mode.")
-          - $merge("rebase")
+    run:
+        - if: $hasFilePattern("docs/guides/built-ins/actions/**") || $hasFilePattern("docs/guides/built-ins/functions/**")
+          then:
+            - $info("Adding a new built-in? Please update the [built-ins.mdx](/reviewpad/docs/blob/main/docs/guides/built-ins/built-ins.mdx)")
+            - $info("Adding a new built-in? Please add a `caution` section if the built-in is not supported for both pull request and issue")
+            - $info("Adding a new built-in? Please run the `checker` on the built-in reviewpad examples. You can find more information about the `checker` in [RELEASE.md](/reviewpad/docs/blob/main/RELEASE.md#test-the-reviewpad-configurations)")
