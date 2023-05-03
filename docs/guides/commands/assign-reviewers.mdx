@@ -1,42 +1,35 @@
 :::info
 
-You can also use the [`assignReviewer` as a built-in](/guides/built-ins#assignreviewer) on your `reviewpad.yml` configuration.
+You can also use the [`assignCodeAuthorReviewers` as a built-in](/guides/built-ins#assignCodeAuthorReviewers) on your `reviewpad.yml` configuration.
 
 :::
 
-The `assign-reviewers` command triggers the [`$assignReviewer`](/guides/built-ins#assignreviewer) action.
+The `assign-reviewer` command triggers the [`$assignCodeAuthorReviewers`](/guides/built-ins#assigncodeauthorreviewers) action.
 
-This command assigns a defined amount of reviewers to the pull request from the provided list of reviewers.
+This command assigns a defined amount of reviewers to the pull request based on code author information.
 
 **Arguments**:
 
-| Arguments                            | Description                           |
-| :----------------------------------- | :------------------------------------ |
-| `comma_separated_list_of_reviewers`  | List of GitHub logins to select from. |
-
-**Flags**:
-
-| Flags                     | Description                                                                          |
-| :------------------------ | :----------------------------------------------------------------------------------- |
-| `-t`, `--total-reviewers` | The total number of reviewers to assign to. By default, it assigns to all reviewers. |
-| `-p`, `--review-policy`   | The policy followed for reviewer assignment. By default, the policy is `reviewpad`.  |
+| Arguments                   | Description                        |
+| :-------------------------- | :--------------------------------- |
+| `total_required_reviewers`  | Total number of required reviewers |
 
 **Syntax**:
 
 ```shell
-/reviewpad assign-reviewers <comma_separated_list_of_reviewers> [--total-reviewers|-t] <total_required_reviewers> [--review-policy|-p] <review_policy>
+/reviewpad assign-reviewer <total_required_reviewers>
 ```
 
 **Examples**:
 
 ```shell
-/reviewpad assign-reviewers john,jane
+/reviewpad assign-reviewer
 ```
 
 ```shell
-/reviewpad assign-reviewers john,jane --total-reviewers 1 --review-policy random
+/reviewpad assign-reviewer 1
 ```
 
 ```shell
-/reviewpad assign-reviewers jane,john -t 1 -p random
+/reviewpad assign-reviewer 5
 ```
