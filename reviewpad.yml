@@ -1,9 +1,13 @@
 extends:
   - https://github.com/reviewpad/.github/blob/main/reviewpad-models/common.yml
 
+rules:
+  - name: has reviewers
+    description: Pull request has reviewers
+    spec: $length($append($reviewers(), $requestedReviewers())) > 0
+
 workflows:
-  # Check that the use cases are updated properly
-  - name: changes-to-use-cases
+  - name: changes to use cases
     always-run: true
     run:
       - if: $hasFilePattern("docs/use-cases/**")
@@ -11,8 +15,7 @@ workflows:
           - $info("Adding a new use case? Please update the [sidebars.js](/reviewpad/docs/blob/main/sidebars.js)")
           - $info("Adding a new use case? Please run the `checker`. You can find more information about the `checker` in [RELEASE.md](/reviewpad/docs/blob/main/RELEASE.md#test-the-reviewpad-configurations)")
 
-  # Check that the built-ins are updated properly
-  - name: changes-built-ins
+  - name: changes built ins
     always-run: true
     run:
         - if: $hasFilePattern("docs/guides/built-ins/actions/**") || $hasFilePattern("docs/guides/built-ins/functions/**")
@@ -20,3 +23,27 @@ workflows:
             - $info("Adding a new built-in? Please update the [built-ins.mdx](/reviewpad/docs/blob/main/docs/guides/built-ins/built-ins.mdx)")
             - $info("Adding a new built-in? Please add a `caution` section if the built-in is not supported for both pull request and issue")
             - $info("Adding a new built-in? Please run the `checker` on the built-in reviewpad examples. You can find more information about the `checker` in [RELEASE.md](/reviewpad/docs/blob/main/RELEASE.md#test-the-reviewpad-configurations)")
+
+  - name: assign reviewer
+    always-run: true
+    run:
+      - if: $assignees() != [] && !$rule("has reviewers")
+        then:
+          - if: $hasFilePattern("docs/**")
+            then: $assignReviewers(["fmallet"])
+          - if: $hasFilePattern("src/**")
+            then: $assignCodeAuthorReviewers(1, $group("reviewers to ignore"), 3)
+
+pipelines:
+  - name: assign assignee
+    trigger: $assignees() == []
+    stages:
+      - actions:
+          - $info("The pull request is still in draft. Reviewpad will only assign a reviewer when the pull request is ready to be reviewed.")
+        until: '!$isDraft()'
+      - actions:
+          - $review("REQUEST_CHANGES", "The pull request has git conflicts. Please fix them.")
+        until: '!$hasGitConflicts()'
+      - actions:
+          - $assignAssignees([$author()])
+        until: $assignees() != []
