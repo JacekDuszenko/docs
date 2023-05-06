@@ -4,7 +4,6 @@ workflows:
   # we first load the "medium-size" workflow from common.yml (the first configuration in the extends section)
   # then we override it with the "medium-size" workflow from team_a.yml (the second configuration in the extends section)
   - name: medium-size
-    always-run: true
     run:
       if: $size() >= 30
       then: $info("this is not a small pr")
@@ -13,7 +12,6 @@ workflows:
   # then we override it with the "small-size" workflow from team_a.yml (the second configuration in the extends section)
   # and finally we override it with the "small-size" workflow from the current configuration
   - name: small-size
-    always-run: true
     run:
       if: $size() < 30
       then: $info("this is a small pr")

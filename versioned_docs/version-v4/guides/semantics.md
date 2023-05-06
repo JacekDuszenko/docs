@@ -72,10 +72,8 @@ The program that will be executed respects the following rules:
 1. A `workflow` is enabled if and only if any of its rules evaluates to **true.**
 2. The order in which the workflows are specified determines the evaluation order.
 3. The final program is built by iterating over all workflows in the specified list.
-4. Only one `workflow` with `always-run: false` is enabled per execution.
-5. The evaluation of `workflow` is lazy, i.e. as soon as a `workflow` is activated, all the others are disregarded unless they have `always-run: true`.
-6. A `pipeline` is enabled if and only if the `trigger` evaluates to **true**.
-7. Only the actions of one `pipeline` will be executed.
+4. A `pipeline` is enabled if and only if the `trigger` evaluates to **true**.
+5. Only the actions of one `pipeline` will be executed.
 
 For example, consider the following pseudo Reviewpad file:
 
@@ -213,12 +211,10 @@ Could be encoded as:
 ```yaml
 workflows:
   - name: pipeline_1_stage_1
-    always-run: true
     if: initial-condition && !RULE_1
     then: ACTION_1
 
   - name: pipeline_1_stage_2
-    always-run: true
     if: initial-condition && RULE_1 && !RULE_2
     then: ACTION_2
 ```
