@@ -19,37 +19,22 @@ rules:
 workflows:
   - name: changes to use cases
     run:
-      - if: $hasFilePattern("docs/use-cases/**")
+      - if: $rule("is ready") && $hasFilePattern("docs/use-cases/**")
         then:
           - $info("Adding a new use case? Please update the [sidebars.js](/reviewpad/docs/blob/main/sidebars.js)")
           - $info("Adding a new use case? Please run the `checker`. You can find more information about the `checker` in [RELEASE.md](/reviewpad/docs/blob/main/RELEASE.md#test-the-reviewpad-configurations)")
 
   - name: changes built ins
     run:
-        - if: $hasFilePattern("docs/guides/built-ins/actions/**") || $hasFilePattern("docs/guides/built-ins/functions/**")
-          then:
-            - $info("Adding a new built-in? Please update the [built-ins.mdx](/reviewpad/docs/blob/main/docs/guides/built-ins/built-ins.mdx)")
-            - $info("Adding a new built-in? Please add a `caution` section if the built-in is not supported for both pull request and issue")
-            - $info("Adding a new built-in? Please run the `checker` on the built-in reviewpad examples. You can find more information about the `checker` in [RELEASE.md](/reviewpad/docs/blob/main/RELEASE.md#test-the-reviewpad-configurations)")
-
-  - name: assign reviewer
-    run:
-      - if: $assignees() != [] && !$rule("has reviewers") && $rule("review-strategy:ask")
+      - if: $rule("is ready")
         then:
-          - if: $hasFilePattern("docs/**")
-            then: $assignReviewers(["fmallet"])
-          - if: $hasFilePattern("src/**")
-            then: $assignCodeAuthorReviewers(1, $group("reviewers to ignore"), 3)
+          - if: $hasFilePattern("docs/guides/built-ins/actions/**") || $hasFilePattern("docs/guides/built-ins/functions/**")
+            then:
+              - $info("Adding a new built-in? Please update the [built-ins.mdx](/reviewpad/docs/blob/main/docs/guides/built-ins/built-ins.mdx)")
+              - $info("Adding a new built-in? Please add a `caution` section if the built-in is not supported for both pull request and issue")
+              - $info("Adding a new built-in? Please run the `checker` on the built-in reviewpad examples. You can find more information about the `checker` in [RELEASE.md](/reviewpad/docs/blob/main/RELEASE.md#test-the-reviewpad-configurations)")
 
-pipelines:
-  - name: assign assignee
-    trigger: $assignees() == []
-    stages:
-      - actions:
-          - $info("The pull request is still in draft. Reviewpad will only assign a reviewer when the pull request is ready to be reviewed.")
-        until: '!$isDraft()'
-      - actions:
-          - $review("REQUEST_CHANGES", "The pull request has git conflicts. Please fix them.")
-        until: '!$hasGitConflicts()'
-      - actions:
-          - $assignAssignees([$author()])
+  - name: notify owner
+    run:
+      - if: $rule("is ready")
+        then: $info("@fmallet you are being notified because you are the owner of this repository")
