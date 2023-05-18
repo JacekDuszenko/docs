@@ -1,0 +1,37 @@
+import CodeBlock from "@theme/CodeBlock";
+import Example from "!!raw-loader!./example.yml";
+
+:::caution
+
+This built-in fails the reviewpad check run status without failing reviewpad.
+
+:::
+
+:::caution
+
+Even though this built-in fails the reviewpad check run status, it does not fail reviewpad.
+This means reviewpad execution will continue event after this built-in is executed.
+
+:::
+
+**Description**:
+
+Fails the reviewpad check run status with a custom message without failing reviewpad.
+
+The custom message is added to both the Reviewpad status check.
+
+**Parameters**:
+
+| Parameter       | Type    | Description        |
+| :-------------- | :------ | :----------------- |
+| `fail_message`  | string  | The fail message.  |
+
+**Examples**:
+
+```yml
+$failCheckStatus("Please include unit tests.")
+```
+
+A `reviewpad.yml` example:
+
+<CodeBlock language="yml" title="reviewpad.yml">{Example}</CodeBlock>
