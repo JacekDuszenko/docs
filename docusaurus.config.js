@@ -131,21 +131,6 @@ const config = {
                         position: 'left',
                     },
                     {
-                        type: 'docsVersionDropdown',
-                        position: 'right',
-                        dropdownItemsAfter: [
-                            {
-                                type: 'html',
-                                value: '<hr style="margin: 0.3rem 0;">',
-                            },
-                            {
-                                to: '/versions',
-                                label: 'All versions',
-                            },
-                        ],
-                        dropdownActiveClassDisabled: true,
-                    },
-                    {
                         href: 'https://github.com/reviewpad/reviewpad',
                         position: 'right',
                         className: 'icon',
