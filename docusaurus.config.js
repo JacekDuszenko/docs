@@ -124,7 +124,6 @@ const config = {
                         position: 'left',
                         label: 'Documentation',
                     },
-                    { to: '/changelog', label: 'Changelog', position: 'left' },
                     {
                         href: 'https://github.com/orgs/reviewpad/discussions',
                         label: 'Discussions',
