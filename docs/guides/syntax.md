@@ -8,7 +8,6 @@ A Reviewpad configuration file has the following shape:
 
 ```yaml
 mode: silent | verbose
-ignore-errors: true | false
 metrics-on-merge: true | false
 
 extends:
@@ -65,20 +64,6 @@ By default, this flag is set to `silent`, which means that Reviewpad will not ge
 
 ```yml
 mode: verbose
-```
-
-## Ignore errors
-
-The `ignore-errors` property is a boolean flag that determines whether or not Reviewpad should disregard any execution errors.
-
-This property is optional and can be set to either `true` or `false`.
-
-By default, this flag is set to `false`, which means that Reviewpad will stop and show an error message if any error occurs.
-
-#### Example
-
-```yml
-ignore-errors: true
 ```
 
 ## Metrics on merge
