@@ -27,6 +27,12 @@ groups:
   ...
   - group_N
 
+dictionaries:
+  - dictionary_1
+  - dictionary_2
+  ...
+  - dictionary_N
+
 rules:
   - rule_1
   - rule_2
@@ -180,6 +186,52 @@ groups:
     type: filter
     param: dev
     where: $pullRequestCountBy($dev) < 10
+```
+
+## Dictionary
+
+A dictionary represents a structured list of key/value pairs, specified as follows:
+
+```yaml
+- name: STRING
+  description: STRING [OPTIONAL]
+  spec:
+    key1: value1
+    key2: value2
+    ...
+    keyn: valuen
+```
+
+-   `name` of a dictionary is used to reference it in other entities.
+-   `description` [OPTIONAL] is a string that can be used to provide more details about the dictionary.
+-   `spec` is a list of YAML key/value pairs. Each key and value should be enclosed in single quotes, and the value should be an Aladino expression, typically either a string or an array.
+
+#### Example with Aladino string values
+
+```yaml
+dictionaries:
+  - name: label-per-file-path
+    description: Labels to apply based on the path of the touched files # optional
+    spec:
+      '**/authentication/**': '"authentication"'
+      '**/order/**': '"order"'
+      '**/api/**': '"api"'
+      'LICENSE': '"license"'
+      '.github/workflow/**': '"ops"'
+```
+
+Note: When using Aladino string values in dictionaries, ensure values are enclosed in both double quotes and single quotes.
+
+#### Example with Aladino array values
+
+```yaml
+dictionaries:
+  - name: reviewing-teams-per-file-path
+    description: Teams to involve in the review process based on the path of the touched files # optional
+    spec:
+      '**/authentication/**': '["security-team", "developers"]'
+      '**/db/**': '["dba-team", "developers"]'
+      '.github/workflow/**': '["devops-team"]'
 ```
 
 ## Rule
