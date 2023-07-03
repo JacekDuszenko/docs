@@ -7,7 +7,6 @@ slug: "syntax"
 A Reviewpad configuration file has the following shape:
 
 ```yaml
-mode: silent | verbose
 metrics-on-merge: true | false
 
 extends:
@@ -51,20 +50,6 @@ pipelines:
 
 You can check the latest formal version of the format [here](https://github.com/reviewpad/schemas/blob/main/latest/schema.json).
 :::
-
-## Mode
-
-The `mode` property in Reviewpad serves as a flag to turn on or off the generation of the [executed actions report](/guides/reports#executed-actions-report).
-
-This property is optional and can be set to either `silent` or `verbose`.
-
-By default, this flag is set to `silent`, which means that Reviewpad will not generate the report. If you prefer, you can switch to `verbose` mode so that Reviewpad will provide feedback on the pull request by commenting with the execution results.
-
-#### Example
-
-```yml
-mode: verbose
-```
 
 ## Metrics on merge
 
