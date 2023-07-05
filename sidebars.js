@@ -21,16 +21,8 @@ const sidebars = {
             collapsed: false,
             items: [
                 "guides/syntax",
+                "guides/aladino-language",
                 "guides/built-ins/built-ins",
-                {
-                    type: "category",
-                    label: "Aladino",
-                    link: { type: "doc", id: "guides/aladino/specification" },
-                    items: [
-                        "guides/aladino/syntax",
-                        "guides/aladino/semantics",
-                    ],
-                },
                 "guides/merge-protection",
                 "guides/annotations",
                 "guides/commands/commands",
@@ -111,9 +103,6 @@ const sidebars = {
             id: "contribute",
             label: "Contribute",
         },
-        {
-            Tooling: ["tooling/vscode-reviewpad-yaml-schema"],
-        }
     ],
 };
 
