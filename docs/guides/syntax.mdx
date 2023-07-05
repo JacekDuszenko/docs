@@ -142,7 +142,7 @@ There are two ways to specify a group:
 -   `name` of a group is used to reference it in other entities.
 -   `description` [OPTIONAL] is a string that can be used to provide more details about the group.
 -   `kind` [OPTIONAL] of group can only be _developers_ at the moment.
--   `spec` is an array of [Aladino](/guides/aladino-language) specifications.
+-   `spec` is an array of [Aladino](aladino-language) specifications.
 
 #### Example
 
@@ -170,7 +170,7 @@ groups:
 -   `kind` of group can only be _developers_ at the moment.
 -   `type` with filter specifies that we will require a _param_ and a boolean _spec_.
 -   `param` declares the name of a variable representing a single developer.
--   `where` is an [Aladino](/guides/aladino-language) boolean expression that uses the _param_ variable to define a condition on which developers should be part of the group.
+-   `where` is an [Aladino](aladino-language) boolean expression that uses the _param_ variable to define a condition on which developers should be part of the group.
 
 #### Example
 
@@ -249,7 +249,7 @@ The structure of a rule is as follows:
 -   `name` of a rule is used to reference it in other rules and workflows.
 -   `kind` [OPTIONAL] of a rule can be either _patch_ or _author._ The kind is related to different properties of pull requests that will be used in the evaluation of the _spec_ field.
 -   `description` [OPTIONAL] is a string that can be used to provide more details about the rule.
--   `spec` is a boolean expression in [Aladino](/guides/aladino-language).
+-   `spec` is a boolean expression in [Aladino](aladino-language).
 
 #### Example
 
@@ -304,7 +304,7 @@ The structure of a workflow is as follows:
 <!-- define ancho as workflow-run -->
 ### `run` {#workflow-run}
 
-The `run` field can be a single action or a list of actions. An action is an [Aladino](/guides/aladino-language) expression to be executed.
+The `run` field can be a single action or a list of actions. An action is an [Aladino](aladino-language) expression to be executed.
 
 We can also use the:
   - the `if ... then ... else` conditional actions to specify a list of actions to run depending on the evaluation of the `if` field.
