@@ -9,15 +9,17 @@ This built-in is unavailable for issues. Reviewpad will ignore it when running o
 
 **Description**:
 
-Verifies if the patch contains a symbol with the provided annotation, returning `true` or `false` as appropriate.
+Verifies if the patch includes a symbol with the specified annotation, returning `true` or `false` accordingly.
+To annotate a symbol, precede the symbol definition with a comment that begins with `// reviewpad-an:`.
 
-:::info
+In the example below, the `main` function is annotated with `critical` annotation. If this `main` function is updated as part of a Pull Request, the expression `$hasAnnotation("critical")` will return true.
 
-Please note that for this to work a symbol must be annotated with the `@reviewpad-an <annotation>` annotation.
-
-For more information annotations, please see [this page](/guides/annotations).
-
-:::
+```go
+// reviewpad-an: critical
+func main() {
+  fmt.Println("Hello, World!")
+}
+```
 
 **Parameters**:
 

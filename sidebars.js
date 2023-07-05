@@ -24,7 +24,6 @@ const sidebars = {
                 "guides/aladino-language",
                 "guides/built-ins/built-ins",
                 "guides/merge-protection",
-                "guides/annotations",
                 "guides/commands/commands",
                 "guides/extends/extends",
                 "guides/reports/reports"
