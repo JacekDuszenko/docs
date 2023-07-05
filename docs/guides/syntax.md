@@ -44,12 +44,6 @@ workflows:
   - workflow_2
   ...
   - workflow_N
-
-pipelines:
-  - pipeline_1
-  - pipeline_2
-  ...
-  - pipeline_N
 ```
 
 :::note note
@@ -220,7 +214,10 @@ dictionaries:
       '.github/workflow/**': '"ops"'
 ```
 
-Note: When using Aladino string values in dictionaries, ensure values are enclosed in both double quotes and single quotes.
+:::note note
+
+When using Aladino string values in dictionaries, ensure values are enclosed in both double quotes and single quotes..
+:::
 
 #### Example with Aladino array values
 
@@ -275,9 +272,16 @@ The structure of a workflow is as follows:
     - [pull_request | issue]
   run:
     - ACTION_1
+    ...
     - if: REF_TO_RULE_1 | INLINE_RULE_1
       then: ACTION_2
       else: ALTERNATIVE_ACTION_2
+    ...
+    - forEach:
+        key: KEY_IDENTIFIER [ONLY WITH DICTIONARY]
+        value: VALUE_IDENTIFIER
+        in: REF_TO_GROUP | REF_TO_DICTIONARY
+        do: ACTION_3
     ...
     - ACTION_N
 ```
@@ -289,13 +293,20 @@ The structure of a workflow is as follows:
     - `if` field specifies the condition that should be satisfied for the `then` field to run. The `if` field can be a reference to a rule by its name or an inline rule.
     - `then` field defines the [Reviewpad action](/guides/built-ins#actions) or the list of [Reviewpad actions](/guides/built-ins#actions) to run when `if` evaluates to true.
     - `else` field defines the [Reviewpad action](/guides/built-ins#actions) or the list of [Reviewpad actions](/guides/built-ins#actions) to run when `if` evaluates to false. This field is optional.
+    - `forEach` field initiates a loop over either a group or a dictionary, as defined in the `in` field.
+      - `key` field specifies the Aladino identifer that can used within the nested [Reviewpad actions](/guides/built-ins#actions) to access the key of the current key/value pair. This field should be specified only when iterating over a dictionary.
+      - `value` field specifies the Aladino identifer that can used withing the nested [Reviewpad actions](/guides/built-ins#actions) to access to value of the current element.
+      - `in` field specifies the reference to the group or dictionary over which iteration occurs.
+      - `do` field defines the [Reviewpad action](/guides/built-ins#actions) or the list of [Reviewpad actions](/guides/built-ins#actions) to be executed for each element of the group or dictionary.
 
 <!-- define ancho as workflow-run -->
 ### `run` {#workflow-run}
 
 The `run` field can be a single action or a list of actions. An action is an [Aladino](/guides/aladino/specification) expression to be executed.
 
-We can also use the `if ... then ... else` conditional actions to specify a list of actions to run depending on the evaluation of the `if` field.
+We can also use the:
+  - the `if ... then ... else` conditional actions to specify a list of actions to run depending on the evaluation of the `if` field.
+  - the `forEach ... key ... value ... in ... do` loop structure to iterate over a list of elements withing a group or dictionary, defining a list of actions to perform on each individual element.
 
 #### Single action
 
@@ -376,47 +387,57 @@ workflows:
           - $assignRandomReviewer()
 ```
 
-## Pipeline
+#### Loop over a group
 
-The structure of a pipeline is as follows:
+```yml
+groups:
+  - name: teams
+    spec: '["team1", "team2", "team3"]'
 
-```yaml
-- name: STRING
-  description: STRING [OPTIONAL]
-  trigger: [STRING | RULE] [OPTIONAL]
-  stages:
-    - actions:
-      - ACTION_1
-      - ACTION_2
-      ...
-      - ACTION_N
-      until: [STRING | RULE] [OPTIONAL]
-    ...
-    - actions:
-      - ACTION_1
-      - ACTION_2
-      ...
-      - ACTION_N
-      until: [STRING | RULE] [OPTIONAL]
+workflows:
+  - name: assign to the team of the author for review
+    run:
+      - if: '!$isDraft()'
+        then:
+          - forEach:
+              value: $team
+              in: $group("teams")
+              do:
+                - if: $isElementOf($author(), $team($team))
+                  then:
+                    - $addLabel($team)
+                    - $assignTeamReviewer([$team])
 ```
 
--   `name` is a string that identifies the pipeline.
--   `description` [OPTIONAL] is a string that can be used to provide more details about the pipeline.
--   `trigger` [OPTIONAL] field is a rule that if true enables the pipeline.
--   `stages` is a list of stages of the pipeline. Each stage is a list of actions that will execute until the `until` condition is true.
+The above configuration outlines a workflow that automatically assigns a pull request for review, selecting a reviewer from the same team as the author of the pull request. Concurrently, it applies the team's label.
 
-#### Example
+#### Loop over a dictionary
 
-```yaml
-pipelines:
-  - name: security-changes
-    trigger: $hasFilePattern("services/db/migrations/**")
-    stages:
-      - actions:
-          - $assignReviewer(["john"], "reviewpad")
-        until: $reviewerStatus("john") == "APPROVED"
-      - actions:
-          - $assignTeamReviewer(["security"])
+```yml
+dictionaries:
+  - name: approval-team-per-file-path
+    spec:
+      '**/authentication/**': '"security"'
+      '**/db/**': '"dba"'
+      '.github/workflows/**': '"devops"'
+
+workflows:
+  - name: assign for review based on touched files
+    run:
+      - if: '!$isDraft()'
+        then:
+          - forEach:
+              key: $filePattern
+              value: $team
+              in: $dictionary("approval-team-per-file-path")
+              do:
+                - if: $hasFilePattern($filePattern)
+                  then:
+                    - $assignTeamReviewer([$team])
 ```
 
-This configuration specifies one pipeline called `security-changes` which is triggered when there are changes to the files in the database migration. After triggering the pipeline, the first stage will assign the reviewer `john` to the pull request and only when `john` approves the changes, the second stage will be triggered and the security team will be assigned to review the pull request.
+The above configuration outlines a workflow that automatically assigns pull requests for review to certain teams based on the part of the code that has been modified:
+
+- When database migration scripts are modified, the workflow involves the DBA team.
+- When the authentication layer is modified, the workflow involves the Security team.
+- When GitHub workflows configuration is modified, the workflow involves the OPS team.

@@ -21,7 +21,6 @@ const sidebars = {
             collapsed: false,
             items: [
                 "guides/syntax",
-                "guides/semantics",
                 "guides/built-ins/built-ins",
                 {
                     type: "category",
