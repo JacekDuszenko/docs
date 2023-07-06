@@ -1,8 +1,0 @@
-workflows:
-  - name: ask
-    description: Ask John and devops team
-    run:
-      if: $hasFilePattern("src/config/**")
-      then:
-        - $assignReviewer(["john"], "random")
-        - $assignTeamReviewer(["devops"])

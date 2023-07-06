@@ -1,6 +1,0 @@
-workflows:
-  - name: ask
-    description: Ask devops team
-    run:
-      if: $hasFilePattern("src/config/**")
-      then: $assignReviewer($team("devops"), 3, "reviewpad")

@@ -17,13 +17,6 @@ rules:
     spec: $length($append($reviewers(), $requestedReviewers())) > 0
 
 workflows:
-  - name: changes to use cases
-    run:
-      - if: $rule("is ready") && $hasFilePattern("docs/use-cases/**")
-        then:
-          - $info("Adding a new use case? Please update the [sidebars.js](/reviewpad/docs/blob/main/sidebars.js)")
-          - $info("Adding a new use case? Please run the `checker`. You can find more information about the `checker` in [RELEASE.md](/reviewpad/docs/blob/main/RELEASE.md#test-the-reviewpad-configurations)")
-
   - name: changes built ins
     run:
       - if: $rule("is ready")
