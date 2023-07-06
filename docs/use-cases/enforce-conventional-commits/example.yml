@@ -1,5 +1,0 @@
-workflows:
-  - name: lint-commits
-    run:
-      if: $description() != ""
-      then: $commitLint()
