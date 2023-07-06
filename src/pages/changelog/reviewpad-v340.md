@@ -4,7 +4,7 @@
 
 #### Aladino Language
 
-[Lambda expressions](/guides/aladino-language) - Aladino now supports lambda functions.
+Lambda expressions - Aladino now supports lambda functions.
 
 #### Aladino Built-ins
 
