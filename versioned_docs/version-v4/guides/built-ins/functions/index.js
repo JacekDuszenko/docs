@@ -70,8 +70,6 @@ import ToJSON from "./toJSON/index.mdx";
 import ToStringArray from "./toStringArray/index.mdx"
 import ToNumber from "./toNumber/index.mdx";
 import TotalCodeReviews from "./totalCodeReviews/index.mdx";
-import TotalCreatedPullRequests from "./totalCreatedPullRequests/index.mdx";
-import WorkflowStatus from "./workflowStatus/index.mdx";
 
 export { All as All };
 export { Any as Any };
@@ -145,5 +143,3 @@ export { ToJSON as ToJSON };
 export { ToStringArray as ToStringArray };
 export { ToNumber as ToNumber };
 export { TotalCodeReviews as TotalCodeReviews };
-export { TotalCreatedPullRequests as TotalCreatedPullRequests };
-export { WorkflowStatus as WorkflowStatus };

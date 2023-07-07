@@ -31,25 +31,6 @@ const latestVersion: Version = {
 }
 
 const pastVersions: Version[] = [
-    {
-        label: 'v3',
-        name: 'v3',
-        docsURL: '/v3',
-        changelogURL: '/changelog#v3270',
-        stage: 'Deprecated',
-    },
-    {
-        label: 'v2',
-        name: 'v2',
-        changelogURL: '/changelog#v240',
-        stage: 'Deprecated',
-    },
-    {
-        label: 'v1',
-        name: 'v1',
-        changelogURL: '/changelog#v120',
-        stage: 'Deprecated',
-    },
 ]
 
 const versions: Version[] = [

@@ -1,9 +1,0 @@
-workflows:
-  - name: critical
-    run:
-      if: $hasCodePattern("ENV_*")
-      then: $addLabel("critical")
-  - name: security
-    run:
-      if: $hasCodePattern("gh_*")
-      then: $fail("Patch includes a GitHub token")

@@ -6,9 +6,9 @@ slug: "/guides/commands"
 
 import * as Commands from "./index";
 
-Reviewpad commands introduce the ability to trigger reviewpad actions through a command-like instruction using pull request comments.
+Reviewpad commands introduce the ability to trigger Reviewpad actions through a command-like instruction using pull request comments.
 
-This is particularly useful when you want to trigger actions on a pull request that are not specified in the reviewpad configuration file.
+This is particularly useful when you want to trigger actions on a pull request that are not specified in the Reviewpad configuration file.
 
 A command is a comment that follows the following format:
 
@@ -20,11 +20,24 @@ Where ACTION is the action to be triggered and ACTION_ARGUMENTS are the argument
 
 ## Available commands
 
+* [/reviewpad summarize](#summarize) - Comment the pull request with the summary of the changes.
+* [/reviewpad explain](#explain) - Explain a piece of code with an inline comment.
 * [/reviewpad assign-reviewer](#assign-reviewer) - Assign reviewer to a pull request.
-* [/reviewpad assign-random-reviewer](#assign-random-reviewer) - Assign a random reviewer to a pull request.
+* [/reviewpad assign-random-reviewer](#assign-random-reviewer) - Assign reviewer to a pull request.
 * [/reviewpad dry-run](#dry-run) - Run reviewpad in dry-run mode and adds a comment with the actions that would be triggered.
 * [/reviewpad run](#run) - Trigger a reviewpad run.
-* [/reviewpad summarize](#summarize) (🧪 EXPERIMENTAL) - Comment the pull request with the summary of the changes.
+
+### summarize 🧪 {#summarize}
+
+---
+
+<Commands.Summarize />
+
+### explain 🧪 {#explain}
+
+---
+
+<Commands.Explain />
 
 ### assign-reviewer
 
@@ -49,9 +62,3 @@ Where ACTION is the action to be triggered and ACTION_ARGUMENTS are the argument
 ---
 
 <Commands.Run />
-
-### summarize 🧪 {#summarize}
-
----
-
-<Commands.Summarize />
