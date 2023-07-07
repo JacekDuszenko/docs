@@ -1,7 +1,7 @@
 ---
-title: "Security"
-id: "security"
-slug: "security"
+title: "GitHub Permissions"
+id: "github-permissions"
+slug: "github-permissions"
 ---
 
 Reviewpad is distributed as a GitHub App. This means that it is installed on your GitHub account and has access to your repositories.
