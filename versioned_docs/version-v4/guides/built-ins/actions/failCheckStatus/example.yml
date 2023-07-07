@@ -1,0 +1,5 @@
+workflows:
+  - name: check-compliance
+    run:
+      if: $changed("src/@1.java", "test/@1.java") == false
+      then: $failCheckStatus("Please include tests for your change")

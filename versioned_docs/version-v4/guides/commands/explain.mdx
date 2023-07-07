@@ -6,16 +6,12 @@ For more questions, contact us on [discord](https://reviewpad.com/discord).
 
 :::
 
-:::info
-
-You can also use the [`summarize` as a built-in](/guides/built-ins/#summarize) on your `reviewpad.yml` configuration.
-
-:::
-
-The `summarize` command adds a comment to the pull request with the summary of the changes.
+The `explain` command adds an inline comment explaining the selected piece of code.
+If the line comment is created on a function name, the overall body of the function is explained.
+If a multi-line comment is created, the overall block of code is explained.
 
 **Syntax**:
 
 ```shell
-/reviewpad summarize
+/reviewpad explain
 ```
