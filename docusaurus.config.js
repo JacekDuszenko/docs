@@ -119,14 +119,8 @@ const config = {
                 },
                 items: [
                     {
-                        type: 'doc',
-                        docId: 'introduction',
-                        position: 'left',
+                        href: '/',
                         label: 'Documentation',
-                    },
-                    {
-                        href: 'https://github.com/orgs/reviewpad/discussions',
-                        label: 'Discussions',
                         position: 'left',
                     },
                     {
