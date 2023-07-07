@@ -3,18 +3,8 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
     DocsSidebar: [
-        "introduction",
-        {
-            type: "category",
-            label: "Getting Started",
-            collapsed: false,
-            items: [
-                "getting-started/installation",
-                "getting-started/configuration",
-                "getting-started/playground",
-                "getting-started/security",
-            ],
-        },
+        "installation",
+        "5-minutes-tutorial",
         {
             type: "category",
             label: "Guides",
@@ -23,22 +13,18 @@ const sidebars = {
                 "guides/syntax",
                 "guides/aladino-language",
                 "guides/built-ins/built-ins",
-                "guides/merge-protection",
                 "guides/commands/commands",
                 "guides/extends/extends",
+                "guides/merge-protection",
                 "guides/message-report",
                 "guides/metric-report"
             ],
         },
+        "github-permissions",
         {
             type: "doc",
             id: "troubleshooting",
             label: "Troubleshooting",
-        },
-        {
-            type: "doc",
-            id: "contribute",
-            label: "Contribute",
         },
     ],
 };
