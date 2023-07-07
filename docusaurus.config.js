@@ -46,7 +46,6 @@ const config = {
                     changefreq: 'weekly',
                     ignorePatterns: [
                         '/next/**',
-                        '/v3/**',
                         '/guides/built-ins-**',
                         '/guides/built-ins/actions/**',
                         '/guides/built-ins/functions/**',
@@ -71,14 +70,6 @@ const config = {
             '@docusaurus/plugin-client-redirects',
             {
                 redirects: [
-                    {
-                        to: '/v3/getting-started/installation-action-tokenized',
-                        from: '/getting-started/installation-action-tokenized',
-                    },
-                    {
-                        to: '/v3/getting-started/installation-action',
-                        from: '/getting-started/installation-action',
-                    },
                     {
                         to: '/troubleshooting',
                         from: '/common-pitfalls',

@@ -1,5 +1,0 @@
-workflows:
-  - name: auto-merge-on-required-approvals
-    run:
-      if: $hasAnnotation("critical") && $hasRequiredApprovals(2, $team("core"))
-      then: $merge()

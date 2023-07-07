@@ -1,5 +1,0 @@
-workflows:
-  - name: long-live
-    run:
-      if: $createdAt() < 15 days ago
-      then: $commentOnce("This pull request has been opened for more than 15 days. Please consider closing it!")
