@@ -44,7 +44,7 @@ Congratulations! You've completed your first Reviewpad workflow.
 
 :::
 
-## Second Worflow: Trigger Actions when Specific Code Sections are Modified
+## Second Workflow: Trigger Actions when Specific Code Sections are Modified
 
 Let's say you want to implement the following workflow:
 - Whenever a source file located in the `authentication` directory is modified:
